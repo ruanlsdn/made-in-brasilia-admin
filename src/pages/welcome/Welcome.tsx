@@ -5,7 +5,6 @@ const Welcome = () => {
   return (
     <div className="welcome">
       <PagesHeader />
-      <div className="welcome-content">WELCOME</div>
     </div>
   );
 };

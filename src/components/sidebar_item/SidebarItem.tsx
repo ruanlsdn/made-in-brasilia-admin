@@ -18,7 +18,7 @@ const SidebarItem = ({ item }: SidebarItemProps) => {
   } = useStateContext();
 
   const handleCloseSideBar = () => {
-    if (isSidebarActive && screenSize <= 900) {
+    if (isSidebarActive && screenSize! <= 900) {
       setIsSidebarActive(false);
     }
   };
@@ -28,7 +28,7 @@ const SidebarItem = ({ item }: SidebarItemProps) => {
       <div className="sidebar-item__group">
         <span>{item.group}</span>
       </div>
-      <div className="sidebar-item__divider" />
+      <div className="sidebar-item__divider gradient-bg-colorful" />
       {item.links.map((link) => (
         <div className="sidebar-item__link" key={link.path}>
           <NavLink

@@ -38,7 +38,7 @@ const Topbar = () => {
             onChange={(event) => setSearchText(event.target.value)}
           />
           <button onClick={() => {}}>
-            <IoSearchOutline size={20} />
+            <IoSearchOutline size={20} color="white" />
           </button>
         </div>
       </div>

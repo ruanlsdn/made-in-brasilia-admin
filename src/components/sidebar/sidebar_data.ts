@@ -15,60 +15,54 @@ export type SidebarData = {
 
 export const SIDEBAR_DATA: SidebarData[] = [
     {
-        group: "HOME",
+        group: "DASHBOARD",
         links: [
             {
-                icon: SlHome,
-                title: "Welcome",
-                description: "Welcome page!",
-                path: "/welcome"
+                icon: SlPeople,
+                title: "Bem-vindo",
+                description: "Página inicial",
+                path: "/"
             },
         ]
     },
     {
-        group: "DATA",
+        group: "LUGARES",
         links: [
             {
                 icon: SlPeople,
-                title: "Employees",
-                description: "Welcome page!",
-                path: "/employees"
+                title: "Cidades",
+                description: "Página de gerenciamento da entidade Cidade",
+                path: "/cities"
             },
             {
                 icon: SlUserFollow,
-                title: "Costumers",
-                description: "Welcome page!",
-                path: "/costumers"
+                title: "Pontos Turísticos",
+                description: "Página de gerenciamento da entidade PontoTuristico",
+                path: "/places"
             },
+        ]
+    },
+     {
+        group: "PENDÊNCIAS",
+        links: [
             {
-                icon: SlBag,
-                title: "Products",
-                description: "Welcome page!",
-                path: "/products"
+                icon: SlPeople,
+                title: "Publicações",
+                description: "Página de moderamento de novas publicações",
+                path: "/pendent/publications"
             },
         ]
     },
     {
-        group: "PAGES",
+        group: "USUÁRIOS",
         links: [
             {
                 icon: SlPeople,
-                title: "Page 1",
-                description: "Welcome page!",
-                path: "/page1"
-            },
-            {
-                icon: SlUserFollow,
-                title: "Page 2",
-                description: "Welcome page!",
-                path: "/page2"
-            },
-            {
-                icon: SlBag,
-                title: "Page 3",
-                description: "Welcome page!",
-                path: "/page3"
+                title: "Usuários",
+                description: "Página de gerenciamento da entidade Usuário",
+                path: "/users"
             },
         ]
     },
+    
 ]

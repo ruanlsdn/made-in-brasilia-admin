@@ -1,21 +1,107 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background: var(--color-main-background);
+  background: var(--background-color);
 }
 
 .App {
-    display: flex;
-    height: 100vh;
+  display: flex;
+  height: 100vh;
 }
 
-.App-content{
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-    width: 100%;
+.App-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gradient-text {
+  background: #ffde05;
+  background: linear-gradient(to right, #ffde05 0%, #69cf61 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-bg {
+  width: 100%;
+  /* ff 3.6+ */
+  background: -moz-radial-gradient(
+    circle at 50% 25%,
+    rgba(43, 43, 43, 1) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-radial-gradient(
+    circle at 50% 25%,
+    rgba(43, 43, 43, 1) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+
+  /* opera 11.10+ */
+  background: -o-radial-gradient(
+    circle at 50% 25%,
+    rgba(43, 43, 43, 1) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+
+  /* ie 10+ */
+  background: -ms-radial-gradient(
+    circle at 50% 25%,
+    rgba(43, 43, 43, 1) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+
+  /* global 92%+ browsers support */
+  background: radial-gradient(
+    circle at 50% 25%,
+    rgba(43, 43, 43, 1) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
+}
+
+.gradient-bg-colorful {
+  /* ff 3.6+ */
+  background: -moz-linear-gradient(
+    90deg,
+    rgba(255, 222, 5, 1) 0%,
+    rgba(105, 207, 97, 1) 100%
+  );
+
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-linear-gradient(
+    90deg,
+    rgba(255, 222, 5, 1) 0%,
+    rgba(105, 207, 97, 1) 100%
+  );
+
+  /* opera 11.10+ */
+  background: -o-linear-gradient(
+    90deg,
+    rgba(255, 222, 5, 1) 0%,
+    rgba(105, 207, 97, 1) 100%
+  );
+
+  /* ie 6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#69CF61', endColorstr='#FFDE05', GradientType=0);
+
+  /* ie 10+ */
+  background: -ms-linear-gradient(
+    90deg,
+    rgba(255, 222, 5, 1) 0%,
+    rgba(105, 207, 97, 1) 100%
+  );
+
+  /* global 94%+ browsers support */
+  background: linear-gradient(
+    90deg,
+    rgba(255, 222, 5, 1) 0%,
+    rgba(105, 207, 97, 1) 100%
+  );
 }

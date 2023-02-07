@@ -22,9 +22,9 @@ const StateContext = createContext<StateContextProps>({
   setIsSidebarActive: () => {},
   activeRoute: {
     icon: SlHome,
-    title: "Welcome",
-    description: "Welcome page!",
-    path: "/welcome",
+    title: "Bem-vindo",
+    description: "Página inicial",
+    path: "/",
   },
   setActiveRoute: () => {},
 });
@@ -39,9 +39,9 @@ export const StateContextProvider = ({ children }: ChildrenProps) => {
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
   const [activeRoute, setActiveRoute] = useState<Links>({
     icon: SlHome,
-    title: "Welcome",
-    description: "Welcome page!",
-    path: "/welcome",
+    title: "Bem-vindo",
+    description: "Página inicial",
+    path: "/",
   });
 
   return (

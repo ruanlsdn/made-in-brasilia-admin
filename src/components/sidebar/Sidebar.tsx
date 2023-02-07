@@ -1,4 +1,4 @@
-import { FaNapster } from "react-icons/fa";
+import { FiSun } from "react-icons/fi";
 import { useStateContext } from "../../contexts/StateContext";
 import SidebarItem from "../sidebar_item/SidebarItem";
 import "./sidebar.css";
@@ -19,8 +19,8 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
-        <FaNapster size={60} />
-        <span>Boilerplate</span>
+        <FiSun size={60} color="white" />
+        <span>Made In Brasilia</span>
       </div>
       <div className="sidebar-content">
         {SIDEBAR_DATA.map((item, index) => (
