@@ -1,0 +1,44 @@
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.modal-header h1,
+p {
+  font-family: var(--font-family);
+}
+
+.modal-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.modal-form-input {
+  flex: 6;
+}
+
+.modal-form button {
+  flex: 1;
+  border: none;
+  cursor: pointer;
+  min-height: 55px;
+  border-radius: 15px;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.modal-footer button {
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+}

@@ -32,7 +32,7 @@ const Topbar = () => {
         <button onClick={() => setIsSidebarActive((prev) => !prev)}>
           <IoMenuOutline size={25} />
         </button>
-        <div className="topbar-options-form">
+        {/* <div className="topbar-options-form">
           <input
             placeholder="Search something..."
             onChange={(event) => setSearchText(event.target.value)}
@@ -40,7 +40,7 @@ const Topbar = () => {
           <button onClick={() => {}}>
             <IoSearchOutline size={20} color="white" />
           </button>
-        </div>
+        </div> */}
       </div>
       <div className="topbar-user">
         <button onClick={() => {}}>

@@ -1,3 +1,43 @@
 .cities {
   margin: 1rem 2rem;
 }
+
+.cities-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 4rem 6rem;
+}
+
+.cities-content_button {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.cities-content_button button {
+  min-height: 40px;
+  flex: 0.1;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.cities-content_button span {
+  font-family: var(--font-family);
+  font-size: 16px;
+}
+
+.cities-content-table {
+  background-color: var(--primary-color);
+}
+
+.cities-content-table h3 {
+  color: var(--text-color);
+}
+
+.cities-content-table span {
+  color: var(--secondary-color);
+  font-size: 18px;
+}

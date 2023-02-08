@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Sidebar, Topbar } from "./components";
+import { Modal, Sidebar, Topbar } from "./components";
 import { useStateContext } from "./contexts/StateContext";
 import { Cities, Welcome } from "./pages";
 
@@ -19,6 +19,7 @@ function App() {
           <Route path="/pendent" element={<Welcome />} />
         </Routes>
       </div>
+      <Modal />
     </div>
   );
 }
