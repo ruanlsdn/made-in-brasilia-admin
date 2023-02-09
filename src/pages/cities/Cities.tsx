@@ -1,36 +1,37 @@
-import React from "react";
-import { PagesHeader } from "../../components";
-import "./cities.css";
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { useEffect, useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
+import { PagesHeader } from "../../components";
+import { useDataControllContext } from "../../contexts/DataControllContext";
 import { useStateContext } from "../../contexts/StateContext";
-
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import { listAllCityRequest } from "../../services/api";
+import "./cities.css";
 
 const Cities = () => {
   const { setIsModalActive } = useStateContext();
+  const { refreshCityData } = useDataControllContext();
+  const [cities, setCities] = useState([]);
+
+  const refreshData = async () => {
+    try {
+      const response = await listAllCityRequest();
+      setCities(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    console.log(refreshCityData);
+    refreshData();
+  }, [refreshCityData]);
+
   return (
     <div className="cities">
       <PagesHeader />
@@ -62,16 +63,16 @@ const Cities = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
+              {cities.map((city, index) => (
+                <TableRow key={index}>
                   <TableCell>
-                    <span>{row.name}</span>
+                    <span>{city.name}</span>
                   </TableCell>
                   <TableCell>
-                    <span>{row.name}</span>
+                    <span>{city.title}</span>
                   </TableCell>
                   <TableCell>
-                    <span>{row.name}</span>
+                    <span>{city.text}</span>
                   </TableCell>
                   <TableCell />
                   <TableCell>

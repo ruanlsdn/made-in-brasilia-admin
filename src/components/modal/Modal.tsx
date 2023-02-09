@@ -1,8 +1,12 @@
-import { TextField } from "@mui/material";
+import { CircularProgress, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import { useState } from "react";
+import { BsCheck2, BsSearch } from "react-icons/bs";
+import { useDataControllContext } from "../../contexts/DataControllContext";
 import { useStateContext } from "../../contexts/StateContext";
-import { BsArrowRepeat, BsCheck2, BsSearch } from "react-icons/bs";
+import iCreateCityDto from "../../dtos/iCreateCityDto";
+import { createCityRequest, getCityIaTextsRequest } from "../../services/api";
 import "./modal.css";
 
 const style = {
@@ -17,26 +21,41 @@ const style = {
 };
 
 const BasicModal = () => {
+  const { setRefreshCityData } = useDataControllContext();
   const { isModalActive, setIsModalActive } = useStateContext();
-  const response = false;
-  const json = JSON.stringify({
-    pessoa: {
-      nome: "João Silva",
-      idade: 30,
-      endereço: {
-        rua: "Rua ABC",
-        numero: 123,
-        cidade: "São Paulo",
-        país: "Brasil",
-      },
-    },
-  });
+  const [cityName, setCityName] = useState("");
+  const [cityDto, setCityDto] = useState<iCreateCityDto | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleSearchClick = async () => {
+    setIsLoading(true);
+    try {
+      const response = await getCityIaTextsRequest(cityName);
+      setCityDto({ ...response.data, name: cityName });
+    } catch (err) {
+      console.log(err);
+    }
+    setIsLoading(false);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      await createCityRequest(cityDto);
+    } catch (err) {
+      console.log(err);
+    }
+    setCityDto(null);
+    setRefreshCityData((prev) => !prev);
+    setIsModalActive(false);
+  };
 
   return (
     <div>
       <Modal
         open={isModalActive}
-        onClose={() => setIsModalActive(false)}
+        onClose={() => {
+          setIsModalActive(false);
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -57,18 +76,25 @@ const BasicModal = () => {
                 label="Nome da cidade"
                 placeholder="Informe o nome da cidade..."
                 variant="outlined"
+                onChange={(e) => setCityName(e.target.value)}
               />
-              <button className="gradient-bg-colorful">
+              <button
+                className="gradient-bg-colorful"
+                onClick={handleSearchClick}
+              >
                 <BsSearch size={30} />
               </button>
             </div>
-            {response && (
-              <div className="modal-ia-response">
-                <span>{json}</span>
-              </div>
-            )}
+
+            <div className="modal-ia-response">
+              <CircularProgress
+                style={{ display: `${isLoading ? "flex" : "none"}` }}
+              />
+              <h3>{cityDto?.title}</h3>
+              <p>{cityDto?.text}</p>
+            </div>
             <div className="modal-footer">
-              <button>
+              <button onClick={handleSubmit}>
                 <BsCheck2 size={30} />
               </button>
             </div>

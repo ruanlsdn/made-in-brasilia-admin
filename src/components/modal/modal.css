@@ -29,6 +29,16 @@ p {
   border-radius: 15px;
 }
 
+.modal-ia-response {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+}
+
 .modal-footer {
   display: flex;
   flex-direction: row;

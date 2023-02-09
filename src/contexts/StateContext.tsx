@@ -41,7 +41,7 @@ export const StateContextProvider = ({ children }: ChildrenProps) => {
   const [screenSize, setScreenSize] = useState<number | undefined>(undefined);
   const [searchText, setSearchText] = useState<string | null>(null);
   const [isSidebarActive, setIsSidebarActive] = useState<boolean>(true);
-  const [isModalActive, setIsModalActive] = useState<boolean>(true);
+  const [isModalActive, setIsModalActive] = useState<boolean>(false);
   const [activeRoute, setActiveRoute] = useState<Links>({
     icon: SlHome,
     title: "Bem-vindo",
