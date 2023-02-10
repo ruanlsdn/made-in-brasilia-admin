@@ -1,11 +1,11 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Modal, Sidebar, Topbar } from "./components";
-import { useStateContext } from "./contexts/StateContext";
+import { Sidebar, Topbar } from "./components";
+import { useApplicationControlContext } from "./contexts/ApplicationControlContext";
 import { Cities, Welcome } from "./pages";
 
 function App() {
-  const { isSidebarActive } = useStateContext();
+  const { isSidebarActive } = useApplicationControlContext();
 
   return (
     <div className="App">
@@ -19,7 +19,6 @@ function App() {
           <Route path="/pendent" element={<Welcome />} />
         </Routes>
       </div>
-      <Modal />
     </div>
   );
 }

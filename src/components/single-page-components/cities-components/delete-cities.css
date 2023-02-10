@@ -1,0 +1,27 @@
+.delete-cities-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.delete-cities-header {
+  font-family: var(-font-family);
+}
+
+.delete-cities-footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.delete-cities-footer button {
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.delete-cities-footer button:hover {
+  color: green;
+}

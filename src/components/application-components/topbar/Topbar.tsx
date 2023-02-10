@@ -4,12 +4,12 @@ import {
   IoSearchOutline,
   IoPersonOutline,
 } from "react-icons/io5";
-import { useStateContext } from "../../contexts/StateContext";
+import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import "./topbar.css";
 
 const Topbar = () => {
   const { screenSize, setScreenSize, setSearchText, setIsSidebarActive } =
-    useStateContext();
+    useApplicationControlContext();
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);

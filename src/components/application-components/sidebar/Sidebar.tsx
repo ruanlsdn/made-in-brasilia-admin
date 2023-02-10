@@ -1,11 +1,11 @@
 import { FiSun } from "react-icons/fi";
-import { useStateContext } from "../../contexts/StateContext";
+import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import SidebarItem from "../sidebar_item/SidebarItem";
 import "./sidebar.css";
 import { SIDEBAR_DATA } from "./sidebar_data";
 
 const Sidebar = () => {
-  const { searchText } = useStateContext();
+  const { searchText } = useApplicationControlContext();
 
   // TODO: apply the search filter to the sidebar data
   SIDEBAR_DATA.forEach((item, index) => {

@@ -1,0 +1,7 @@
+.menu {
+  display: flex;
+  height: 50px;
+  width: 150px;
+  align-items: center;
+  justify-content: center;
+}

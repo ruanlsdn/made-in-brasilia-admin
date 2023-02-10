@@ -1,8 +1,7 @@
-import { useContext, useEffect } from "react";
-import { useStateContext } from "../../contexts/StateContext";
+import { NavLink } from "react-router-dom";
+import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { SidebarData } from "../sidebar/sidebar_data";
 import "./sidebar_item.css";
-import { NavLink } from "react-router-dom";
 
 type SidebarItemProps = {
   item: SidebarData;
@@ -15,7 +14,7 @@ const SidebarItem = ({ item }: SidebarItemProps) => {
     screenSize,
     activeRoute,
     setActiveRoute,
-  } = useStateContext();
+  } = useApplicationControlContext();
 
   const handleCloseSideBar = () => {
     if (isSidebarActive && screenSize! <= 900) {
@@ -45,7 +44,7 @@ const SidebarItem = ({ item }: SidebarItemProps) => {
           >
             <div className="sidebar-item-button__content">
               <link.icon size={22} />
-              <span> {link.title}</span>
+              <span>{link.title}</span>
             </div>
           </NavLink>
         </div>

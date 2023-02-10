@@ -1,41 +1,47 @@
 import React, { createContext, useContext, useState } from "react";
-import { SlHome } from "react-icons/sl";
-import { Links, SidebarData } from "../components/sidebar/sidebar_data";
+import iCity from "../dtos/iCity";
 
-type DataControllContextProps = {
+type DataControlContextProps = {
   refreshCityData: boolean;
   setRefreshCityData: React.Dispatch<React.SetStateAction<boolean>>;
   refreshPostData: boolean;
   setRefreshPostData: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedCity: iCity | null;
+  setSelectedCity: React.Dispatch<React.SetStateAction<iCity | null>>;
 };
 
-const DataControllContext = createContext<DataControllContextProps>({
+const DataControlContext = createContext<DataControlContextProps>({
   refreshCityData: false,
   setRefreshCityData: () => {},
   refreshPostData: false,
   setRefreshPostData: () => {},
+  selectedCity: null,
+  setSelectedCity: () => {},
 });
 
 type ChildrenProps = {
   children: React.ReactNode;
 };
 
-export const DataControllContextProvider = ({ children }: ChildrenProps) => {
+export const DataControlProvider = ({ children }: ChildrenProps) => {
   const [refreshCityData, setRefreshCityData] = useState<boolean>(false);
   const [refreshPostData, setRefreshPostData] = useState<boolean>(false);
+  const [selectedCity, setSelectedCity] = useState<iCity | null>(null);
 
   return (
-    <DataControllContext.Provider
+    <DataControlContext.Provider
       value={{
         refreshCityData,
         setRefreshCityData,
         refreshPostData,
         setRefreshPostData,
+        selectedCity,
+        setSelectedCity,
       }}
     >
       {children}
-    </DataControllContext.Provider>
+    </DataControlContext.Provider>
   );
 };
 
-export const useDataControllContext = () => useContext(DataControllContext);
+export const useDataControlContext = () => useContext(DataControlContext);

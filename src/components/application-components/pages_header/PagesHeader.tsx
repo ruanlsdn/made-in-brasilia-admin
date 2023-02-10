@@ -1,9 +1,9 @@
 import React from "react";
-import { useStateContext } from "../../contexts/StateContext";
+import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import "./pages_header.css";
 
 const PagesHeader = () => {
-  const { activeRoute } = useStateContext();
+  const { activeRoute } = useApplicationControlContext();
   return (
     <div className="header">
       <p>{activeRoute.title}</p>

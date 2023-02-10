@@ -2,18 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { DataControllContextProvider } from "./contexts/DataControllContext";
-import { StateContextProvider } from "./contexts/StateContext";
+import { DataControlProvider } from "./contexts/DataControlContext";
+import { ApplicationControlProvider } from "./contexts/ApplicationControlContext";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <StateContextProvider>
-        <DataControllContextProvider>
+      <ApplicationControlProvider>
+        <DataControlProvider>
           <App />
-        </DataControllContextProvider>
-      </StateContextProvider>
+        </DataControlProvider>
+      </ApplicationControlProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

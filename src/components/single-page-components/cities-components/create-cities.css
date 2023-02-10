@@ -1,15 +1,15 @@
-.modal-content {
+.create-cities-content {
   display: flex;
   flex-direction: column;
   gap: 3rem;
 }
 
-.modal-header h1,
+.create-cities-header h1,
 p {
   font-family: var(--font-family);
 }
 
-.modal-form {
+.create-cities-form {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -17,11 +17,11 @@ p {
   gap: 0.5rem;
 }
 
-.modal-form-input {
+.create-cities-form-input {
   flex: 6;
 }
 
-.modal-form button {
+.create-cities-form button {
   flex: 1;
   border: none;
   cursor: pointer;
@@ -29,7 +29,7 @@ p {
   border-radius: 15px;
 }
 
-.modal-ia-response {
+.create-cities-ia-response {
   display: flex;
   flex-direction: column;
   font-family: var(--font-family);
@@ -39,7 +39,7 @@ p {
   font-size: 18px;
 }
 
-.modal-footer {
+.create-cities-footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -47,8 +47,12 @@ p {
   gap: 3rem;
 }
 
-.modal-footer button {
+.create-cities-footer button {
   border: none;
   background-color: unset;
   cursor: pointer;
+}
+
+.create-cities-footer button:hover {
+  color: green;
 }

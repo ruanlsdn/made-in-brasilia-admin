@@ -13,12 +13,15 @@ export const listAllCityRequest = async () => {
   return await api.get("/city/list-all");
 };
 
-export const updateCityRequest = async (id: string, dto: iUpdateCityDto) => {
-  return await api.put("/city");
+export const updateCityRequest = async (
+  id: string | undefined,
+  dto: iUpdateCityDto
+) => {
+  return await api.put(`/city/${id}`, dto);
 };
 
-export const deleteCityRequest = async (id: string) => {
-  return await api.delete("/city");
+export const deleteCityRequest = async (id: string | undefined) => {
+  return await api.delete(`/city/${id}`);
 };
 
 export const getCityIaTextsRequest = async (cityName: string) => {
