@@ -9,8 +9,9 @@ export const createCityRequest = async (dto: iCreateCityDto) => {
   return await api.post("/city", dto);
 };
 
-export const listAllCityRequest = async () => {
-  return await api.get("/city/list-all");
+export const listAllCityRequest = async (page: number | null) => {
+  if (page === null) return await api.get("/city/list-all");
+  return await api.get(`/city/list-all?page=${page}`);
 };
 
 export const updateCityRequest = async (

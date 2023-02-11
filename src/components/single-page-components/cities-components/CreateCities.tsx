@@ -45,7 +45,7 @@ const CreateCities = () => {
         <h1>Adicionar cidade</h1>
         <p>
           Este cadastro é automatizado por inteligência artificial. Preencha o
-          formulário, aguarde o resultado e confirme para salvar ou tente
+          nome da cidade, aguarde o resultado e confirme para salvar ou tente
           novamente para gerar um novo texto.
         </p>
       </div>

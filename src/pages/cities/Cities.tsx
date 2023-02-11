@@ -14,21 +14,30 @@ import {
   SharedModal,
   UpdateCities,
 } from "../../components";
-import { useDataControlContext } from "../../contexts/DataControlContext";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
+import { useDataControlContext } from "../../contexts/DataControlContext";
 import iCity from "../../dtos/iCity";
 import { listAllCityRequest } from "../../services/api";
 import "./cities.css";
 
 const Cities = () => {
   const { setIsModalActive } = useApplicationControlContext();
-  const { refreshCityData, selectedCity } = useDataControlContext();
+  const { refreshCityData } = useDataControlContext();
   const [cities, setCities] = useState<iCity[] | []>([]);
   const [modalOption, setModalOption] = useState<number>(0);
 
+  const handlePaginationChange = async (page: number) => {
+    try {
+      const response = await listAllCityRequest(page - 1);
+      setCities(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const refreshData = async () => {
     try {
-      const response = await listAllCityRequest();
+      const response = await listAllCityRequest(null);
       setCities(response.data);
     } catch (err) {
       console.log(err);
@@ -37,7 +46,6 @@ const Cities = () => {
 
   useEffect(() => {
     refreshData();
-    console.log(selectedCity);
   }, [refreshCityData]);
 
   return (
@@ -61,13 +69,13 @@ const Cities = () => {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <h3>Nome</h3>
+                  <h3>NOME</h3>
                 </TableCell>
                 <TableCell>
-                  <h3>Título</h3>
+                  <h3>TÍTULO</h3>
                 </TableCell>
                 <TableCell>
-                  <h3>Texto</h3>
+                  <h3>TEXTO</h3>
                 </TableCell>
                 <TableCell />
                 <TableCell />
@@ -97,8 +105,8 @@ const Cities = () => {
         <Pagination
           className="pagination"
           color="primary"
-          count={2}
-          onChange={() => console.log(1)}
+          count={999}
+          onChange={(e, page) => handlePaginationChange(page)}
         />
       </div>
       {modalOption == 1 && <SharedModal children={<CreateCities />} />}
