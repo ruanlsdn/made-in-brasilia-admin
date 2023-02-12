@@ -40,6 +40,10 @@ export const createPostRequest = async (dto: iPostDto) => {
   return await api.post("/post", dto);
 };
 
+export const listPendingPostRequest = async (page: number | null) => {
+  return await api.get(`/post/pending?page=${page}`);
+};
+
 export const listAllPostRequest = async (page: number | null) => {
   return await api.get(`/post?page=${page}`);
 };

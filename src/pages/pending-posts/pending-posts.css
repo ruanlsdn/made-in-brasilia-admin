@@ -1,9 +1,9 @@
-.posts {
+.pending-posts {
   flex: 1;
   margin: 1rem 2rem;
 }
 
-.posts-content {
+.pending-posts-content {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -11,7 +11,7 @@
   padding: 3rem 6rem;
 }
 
-.posts-content_button {
+.pending-posts-content_button {
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -19,7 +19,7 @@
   justify-content: flex-end;
 }
 
-.posts-content_button button {
+.pending-posts-content_button button {
   min-height: 40px;
   flex: 0.1;
   border: none;
@@ -27,23 +27,39 @@
   cursor: pointer;
 }
 
-.posts-content_button span {
+.pending-posts-content_button span {
   font-family: var(--font-family);
   font-size: 16px;
 }
 
-.posts-content-table {
+.pending-posts-content-table {
   border-radius: 15px;
   background-color: var(--primary-color);
 }
 
-.posts-content-table h3 {
+.pending-posts-content-table h3 {
   color: var(--text-color);
 }
 
-.posts-content-table span {
+.pending-posts-content-table span {
   color: var(--secondary-color);
   font-size: 16px;
+}
+
+.pending-posts-thumbs-container {
+  display: flex;
+  gap: 1rem;
+}
+
+.pending-posts-thumbs {
+  border: none;
+  background-color: unset;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+.pending-posts-thumbs:hover {
+  color: var(--secondary-color);
 }
 
 .pagination {

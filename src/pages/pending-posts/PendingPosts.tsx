@@ -6,37 +6,54 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
-import {
-  CreatePosts,
-  DeletePosts,
-  PagesHeader,
-  SharedMenu,
-  SharedModal,
-} from "../../components";
-import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
+import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
+import { PagesHeader } from "../../components";
 import { useDataControlContext } from "../../contexts/DataControlContext";
 import { iPost } from "../../dtos/iPost";
-import { listAllPostRequest } from "../../services/api";
-import "./posts.css";
+import { iPostDto } from "../../dtos/iPostDto";
+import { listPendingPostRequest, updatePostRequest } from "../../services/api";
+import "./pending-posts.css";
 
-const Posts = () => {
-  const { setIsModalActive } = useApplicationControlContext();
-  const { refreshPostData } = useDataControlContext();
+const PendingPosts = () => {
+  const { refreshPostData, setRefreshPostData } = useDataControlContext();
   const [posts, setPosts] = useState<iPost[] | []>([]);
-  const [modalOption, setModalOption] = useState<number>(0);
 
   const handlePaginationChange = async (page: number) => {
     try {
-      const response = await listAllPostRequest(page - 1);
+      const response = await listPendingPostRequest(page - 1);
       setPosts(response.data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  const handleThumbsUp = async (id: string) => {
+    try {
+      const dto: iPostDto = {
+        postStatusId: 2,
+      };
+      const response = await updatePostRequest(id, dto);
+    } catch (error) {
+      console.log(error);
+    }
+    setRefreshPostData((prev) => !prev);
+  };
+
+  const handleThumbsDown = async (id: string) => {
+    try {
+      const dto: iPostDto = {
+        postStatusId: 3,
+      };
+      const response = await updatePostRequest(id, dto);
+    } catch (error) {
+      console.log(error);
+    }
+    setRefreshPostData((prev) => !prev);
+  };
+
   const refreshData = async () => {
     try {
-      const response = await listAllPostRequest(0);
+      const response = await listPendingPostRequest(0);
       setPosts(response.data);
     } catch (err) {
       console.log(err);
@@ -48,23 +65,11 @@ const Posts = () => {
   }, [refreshPostData]);
 
   return (
-    <div className="posts">
+    <div className="pending-posts">
       <PagesHeader />
-      <div className="posts-content">
-        <div className="posts-content_button">
-          {/* <input className="" /> */}
-          <button
-            className=" gradient-bg-colorful"
-            onClick={() => {
-              setModalOption(1);
-              setIsModalActive(true);
-            }}
-          >
-            <span>Adicionar</span>
-          </button>
-        </div>
+      <div className="pending-posts-content">
         <TableContainer>
-          <Table className="posts-content-table" sx={{ minWidth: 650 }}>
+          <Table className="pending-posts-content-table" sx={{ minWidth: 650 }}>
             <TableHead>
               <TableRow>
                 <TableCell align="center">
@@ -79,7 +84,9 @@ const Posts = () => {
                 <TableCell align="center">
                   <h3>HORÁRIO DE FUNCIONAMENTO</h3>
                 </TableCell>
-                <TableCell />
+                <TableCell align="center">
+                  <h3>AÇÕES</h3>
+                </TableCell>
                 <TableCell />
               </TableRow>
             </TableHead>
@@ -98,9 +105,21 @@ const Posts = () => {
                   <TableCell align="center">
                     <span>{`${post.openTime} - ${post.closeTime}`}</span>
                   </TableCell>
-                  <TableCell />
-                  <TableCell>
-                    <SharedMenu entity={post} setModalOption={setModalOption} />
+                  <TableCell align="center">
+                    <div className="pending-posts-thumbs-container">
+                      <button
+                        className="pending-posts-thumbs"
+                        onClick={() => handleThumbsUp(post.id)}
+                      >
+                        <FiThumbsUp size={30} />
+                      </button>
+                      <button
+                        className="pending-posts-thumbs"
+                        onClick={() => handleThumbsDown(post.id)}
+                      >
+                        <FiThumbsDown size={30} />
+                      </button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -114,13 +133,8 @@ const Posts = () => {
           onChange={(e, page) => handlePaginationChange(page)}
         />
       </div>
-      {modalOption == 1 || modalOption == 2 ? (
-        <SharedModal children={<CreatePosts modalOption={modalOption} />} />
-      ) : (
-        <SharedModal children={<DeletePosts />} />
-      )}
     </div>
   );
 };
 
-export default Posts;
+export default PendingPosts;

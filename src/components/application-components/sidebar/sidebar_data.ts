@@ -1,5 +1,9 @@
 import { IconType } from "react-icons";
 import { SlHome, SlPeople, SlUserFollow, SlBag } from "react-icons/sl";
+import { GiModernCity } from "react-icons/gi";
+import { AiOutlineHome } from "react-icons/ai";
+import { BsShop, BsClipboard } from "react-icons/bs";
+import { FaChalkboardTeacher } from "react-icons/fa";
 
 export type Links = {
   icon: IconType;
@@ -18,7 +22,7 @@ export const SIDEBAR_DATA: SidebarData[] = [
     group: "INÍCIO",
     links: [
       {
-        icon: SlPeople,
+        icon: AiOutlineHome,
         title: "Bem-vindo",
         description: "Página inicial",
         path: "/",
@@ -29,13 +33,13 @@ export const SIDEBAR_DATA: SidebarData[] = [
     group: "CONTEÚDO",
     links: [
       {
-        icon: SlPeople,
+        icon: GiModernCity,
         title: "Cidades",
         description: "Página de gerenciamento da entidade City",
         path: "/cities",
       },
       {
-        icon: SlUserFollow,
+        icon: BsClipboard,
         title: "Postagens",
         description: "Página de gerenciamento da entidade Post",
         path: "/posts",
@@ -46,10 +50,10 @@ export const SIDEBAR_DATA: SidebarData[] = [
     group: "MODERAÇÃO",
     links: [
       {
-        icon: SlPeople,
+        icon: FaChalkboardTeacher,
         title: "Postagens pendentes",
         description: "Página de gerenciamento de pendências da entidade Post",
-        path: "/pending/posts",
+        path: "/pending-posts",
       },
     ],
   },
