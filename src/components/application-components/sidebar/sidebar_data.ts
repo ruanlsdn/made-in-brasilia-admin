@@ -15,7 +15,7 @@ export type SidebarData = {
 
 export const SIDEBAR_DATA: SidebarData[] = [
   {
-    group: "DASHBOARD",
+    group: "INÍCIO",
     links: [
       {
         icon: SlPeople,
@@ -26,19 +26,30 @@ export const SIDEBAR_DATA: SidebarData[] = [
     ],
   },
   {
-    group: "LUGARES",
+    group: "CONTEÚDO",
     links: [
       {
         icon: SlPeople,
         title: "Cidades",
-        description: "Página de gerenciamento da entidade Cidade",
+        description: "Página de gerenciamento da entidade City",
         path: "/cities",
       },
       {
         icon: SlUserFollow,
-        title: "Pontos Turísticos",
-        description: "Página de gerenciamento da entidade PontoTuristico",
-        path: "/places",
+        title: "Postagens",
+        description: "Página de gerenciamento da entidade Post",
+        path: "/posts",
+      },
+    ],
+  },
+  {
+    group: "MODERAÇÃO",
+    links: [
+      {
+        icon: SlPeople,
+        title: "Postagens pendentes",
+        description: "Página de gerenciamento de pendências da entidade Post",
+        path: "/pending/posts",
       },
     ],
   },

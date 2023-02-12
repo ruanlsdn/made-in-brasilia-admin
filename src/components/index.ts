@@ -6,3 +6,6 @@ export { default as SharedMenu } from "./shared-components/menu/SharedMenu";
 export { default as CreateCities } from "./single-page-components/cities-components/CreateCities";
 export { default as UpdateCities } from "./single-page-components/cities-components/UpdateCities";
 export { default as DeleteCities } from "./single-page-components/cities-components/DeleteCities";
+export { default as CreatePosts } from "./single-page-components/posts-components/CreatePosts";
+export { default as UpdatePosts } from "./single-page-components/posts-components/UpdatePosts";
+export { default as DeletePosts } from "./single-page-components/posts-components/DeletePosts";

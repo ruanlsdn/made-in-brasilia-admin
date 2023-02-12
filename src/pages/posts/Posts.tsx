@@ -7,29 +7,28 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
 import {
-  CreateCities,
-  DeleteCities,
+  CreatePosts,
+  DeletePosts,
   PagesHeader,
   SharedMenu,
   SharedModal,
-  UpdateCities,
 } from "../../components";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../contexts/DataControlContext";
-import iCity from "../../dtos/iCity";
-import { listAllPaginatedCityRequest } from "../../services/api";
-import "./cities.css";
+import { iPost } from "../../dtos/iPost";
+import { listAllPostRequest } from "../../services/api";
+import "./posts.css";
 
 const Cities = () => {
   const { setIsModalActive } = useApplicationControlContext();
-  const { refreshCityData } = useDataControlContext();
-  const [cities, setCities] = useState<iCity[] | []>([]);
+  const { refreshPostData } = useDataControlContext();
+  const [posts, setPosts] = useState<iPost[] | []>([]);
   const [modalOption, setModalOption] = useState<number>(0);
 
   const handlePaginationChange = async (page: number) => {
     try {
-      const response = await listAllPaginatedCityRequest(page - 1);
-      setCities(response.data);
+      const response = await listAllPostRequest(page - 1);
+      setPosts(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -37,8 +36,8 @@ const Cities = () => {
 
   const refreshData = async () => {
     try {
-      const response = await listAllPaginatedCityRequest(null);
-      setCities(response.data);
+      const response = await listAllPostRequest(0);
+      setPosts(response.data);
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +45,7 @@ const Cities = () => {
 
   useEffect(() => {
     refreshData();
-  }, [refreshCityData]);
+  }, [refreshPostData]);
 
   return (
     <div className="cities">
@@ -69,39 +68,39 @@ const Cities = () => {
             <TableHead>
               <TableRow>
                 <TableCell align="center">
-                  <h3>ID</h3>
-                </TableCell>
-                <TableCell align="center">
                   <h3>NOME</h3>
                 </TableCell>
                 <TableCell align="center">
-                  <h3>TÍTULO</h3>
+                  <h3>TEXTO</h3>
                 </TableCell>
                 <TableCell align="center">
-                  <h3>TEXTO</h3>
+                  <h3>DIAS DE FUNCIONAMENTO</h3>
+                </TableCell>
+                <TableCell align="center">
+                  <h3>HORÁRIO DE FUNCIONAMENTO</h3>
                 </TableCell>
                 <TableCell />
                 <TableCell />
               </TableRow>
             </TableHead>
             <TableBody>
-              {cities.map((city, index) => (
+              {posts.map((post, index) => (
                 <TableRow key={index}>
                   <TableCell align="center">
-                    <span>{city.id}</span>
+                    <span>{post.name}</span>
                   </TableCell>
                   <TableCell align="center">
-                    <span>{city.name}</span>
+                    <span>{post.text}</span>
                   </TableCell>
                   <TableCell align="center">
-                    <span>{city.title}</span>
+                    <span>{`${post.openDay} - ${post.closeDay}`}</span>
                   </TableCell>
                   <TableCell align="center">
-                    <span>{city.text}</span>
+                    <span>{`${post.openTime} - ${post.closeTime}`}</span>
                   </TableCell>
                   <TableCell />
                   <TableCell>
-                    <SharedMenu entity={city} setModalOption={setModalOption} />
+                    <SharedMenu entity={post} setModalOption={setModalOption} />
                   </TableCell>
                 </TableRow>
               ))}
@@ -115,9 +114,11 @@ const Cities = () => {
           onChange={(e, page) => handlePaginationChange(page)}
         />
       </div>
-      {modalOption == 1 && <SharedModal children={<CreateCities />} />}
-      {modalOption == 2 && <SharedModal children={<UpdateCities />} />}
-      {modalOption == 3 && <SharedModal children={<DeleteCities />} />}
+      {modalOption == 1 || modalOption == 2 ? (
+        <SharedModal children={<CreatePosts modalOption={modalOption} />} />
+      ) : (
+        <SharedModal children={<DeletePosts />} />
+      )}
     </div>
   );
 };

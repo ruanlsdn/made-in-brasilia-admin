@@ -3,22 +3,27 @@ import React from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
-import iCity from "../../../dtos/iCity";
 import "./shared-menu.css";
 
 type SharedMenuProps = {
-  city: iCity;
+  entity: any;
   setModalOption: React.Dispatch<React.SetStateAction<number>>;
 };
-const SharedMenu = ({ city, setModalOption }: SharedMenuProps) => {
+
+const SharedMenu = ({ entity, setModalOption }: SharedMenuProps) => {
+  const { activeRoute } = useApplicationControlContext();
   const { anchorEl, setAnchorEl, setIsModalActive } =
     useApplicationControlContext();
-  const { setSelectedCity } = useDataControlContext();
+  const { setSelectedCity, setSelectedPost } = useDataControlContext();
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-    setSelectedCity(city);
+    console.log(activeRoute);
+    if (activeRoute.path == "/cities") setSelectedCity(entity);
+    else {
+      setSelectedPost(entity);
+    }
   };
 
   const handleClose = () => {

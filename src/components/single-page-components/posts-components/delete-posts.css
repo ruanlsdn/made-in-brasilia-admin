@@ -1,0 +1,27 @@
+.delete-posts-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.delete-posts-header {
+  font-family: var(-font-family);
+}
+
+.delete-posts-footer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.delete-posts-footer button {
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.delete-posts-footer button:hover {
+  color: green;
+}

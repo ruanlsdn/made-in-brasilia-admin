@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Sidebar, Topbar } from "./components";
 import { useApplicationControlContext } from "./contexts/ApplicationControlContext";
-import { Cities, Welcome } from "./pages";
+import { Cities, Posts, Welcome } from "./pages";
 
 function App() {
   const { isSidebarActive } = useApplicationControlContext();
@@ -15,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Welcome />} />
           <Route path="/cities" element={<Cities />} />
-          <Route path="/places" element={<Welcome />} />
+          <Route path="/posts" element={<Posts />} />
           <Route path="/pendent" element={<Welcome />} />
         </Routes>
       </div>

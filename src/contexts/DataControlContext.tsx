@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import iCity from "../dtos/iCity";
+import { iPost } from "../dtos/iPost";
 
 type DataControlContextProps = {
   refreshCityData: boolean;
@@ -8,6 +9,8 @@ type DataControlContextProps = {
   setRefreshPostData: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCity: iCity | null;
   setSelectedCity: React.Dispatch<React.SetStateAction<iCity | null>>;
+  selectedPost: iPost | null;
+  setSelectedPost: React.Dispatch<React.SetStateAction<iPost | null>>;
 };
 
 const DataControlContext = createContext<DataControlContextProps>({
@@ -17,6 +20,8 @@ const DataControlContext = createContext<DataControlContextProps>({
   setRefreshPostData: () => {},
   selectedCity: null,
   setSelectedCity: () => {},
+  selectedPost: null,
+  setSelectedPost: () => {},
 });
 
 type ChildrenProps = {
@@ -27,6 +32,7 @@ export const DataControlProvider = ({ children }: ChildrenProps) => {
   const [refreshCityData, setRefreshCityData] = useState<boolean>(false);
   const [refreshPostData, setRefreshPostData] = useState<boolean>(false);
   const [selectedCity, setSelectedCity] = useState<iCity | null>(null);
+  const [selectedPost, setSelectedPost] = useState<iPost | null>(null);
 
   return (
     <DataControlContext.Provider
@@ -37,6 +43,8 @@ export const DataControlProvider = ({ children }: ChildrenProps) => {
         setRefreshPostData,
         selectedCity,
         setSelectedCity,
+        selectedPost,
+        setSelectedPost,
       }}
     >
       {children}
