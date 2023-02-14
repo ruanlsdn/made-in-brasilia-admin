@@ -6,4 +6,5 @@ export interface iCreatePostDto {
   openTime: string;
   closeTime: string;
   cityId: string;
+  postStatusId: number;
 }

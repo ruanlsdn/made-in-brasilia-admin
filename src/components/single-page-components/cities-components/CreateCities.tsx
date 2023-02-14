@@ -7,6 +7,7 @@ import iCreateCityDto from "../../../dtos/iCreateCityDto";
 import {
   createCityRequest,
   getCityIaTextsRequest,
+  uploadCityImagesRequest,
 } from "../../../services/api";
 import "./create-cities.css";
 
@@ -15,7 +16,21 @@ const CreateCities = () => {
   const { setIsModalActive } = useApplicationControlContext();
   const [cityName, setCityName] = useState("");
   const [cityDto, setCityDto] = useState<iCreateCityDto | null>(null);
+  const [cityImages, setCityImages] = useState<FormData[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const handleImageUpload = (e) => {
+    const array = e.target.files;
+    let images: FormData[] = [];
+
+    for (let index = 0; index < array.length; index++) {
+      const formData = new FormData();
+      formData.append("file", array[index]);
+      images.push(formData);
+    }
+
+    setCityImages(images);
+  };
 
   const handleSearchClick = async () => {
     setIsLoading(true);
@@ -28,13 +43,29 @@ const CreateCities = () => {
     setIsLoading(false);
   };
 
+  const upload = async (form: FormData) => {
+    try {
+      await uploadCityImagesRequest(form);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = async () => {
     try {
-      await createCityRequest(cityDto);
+      const response = await createCityRequest(cityDto);
+
+      if (response.status == 201) {
+        cityImages?.map((form) => {
+          form.append("cityId", response.data.id);
+          upload(form);
+        });
+      }
     } catch (err) {
       console.log(err);
     }
     setCityDto(null);
+    setCityImages(null);
     setRefreshCityData((prev) => !prev);
     setIsModalActive(false);
   };
@@ -49,6 +80,7 @@ const CreateCities = () => {
           novamente para gerar um novo texto.
         </p>
       </div>
+      <input type="file" onChange={handleImageUpload} multiple />
       <div className="create-cities-form">
         <TextField
           className="create-cities-form-input"

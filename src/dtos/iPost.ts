@@ -7,4 +7,5 @@ export interface iPost {
   openTime: string;
   closeTime: string;
   cityId: string;
+  postStatusId: number;
 }

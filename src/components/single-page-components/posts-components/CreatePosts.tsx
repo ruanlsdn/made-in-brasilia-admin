@@ -16,6 +16,7 @@ import {
   createPostRequest,
   listAllCityRequest,
   updatePostRequest,
+  uploadPostImagesRequest,
 } from "../../../services/api";
 import "./create-posts.css";
 
@@ -52,6 +53,29 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     ""
   );
   const [newPostCityId, setNewPostCityId] = useState<string | undefined>("");
+  const [newPostStatusId, setNewPostStatusId] = useState<number | undefined>(1);
+  const [postImages, setPostImages] = useState<FormData[] | null>(null);
+
+  const handleImageUpload = (e) => {
+    const array = e.target.files;
+    let images: FormData[] = [];
+
+    for (let index = 0; index < array.length; index++) {
+      const formData = new FormData();
+      formData.append("file", array[index]);
+      images.push(formData);
+    }
+
+    setPostImages(images);
+  };
+
+  const upload = async (form: FormData) => {
+    try {
+      await uploadPostImagesRequest(form);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleSubmit = async () => {
     const dto: iPostDto = {
@@ -62,12 +86,19 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       openTime: newPostOpenTime,
       closeTime: newPostCloseTime,
       cityId: newPostCityId,
+      postStatusId: newPostStatusId,
     };
 
     try {
       if (modalOption === 1) {
         const response = await createPostRequest(dto);
-        console.log(response);
+
+        if (response.status == 201) {
+          postImages?.map((form) => {
+            form.append("postId", response.data.id);
+            upload(form);
+          });
+        }
       } else {
         const response = await updatePostRequest(selectedPost?.id, dto);
         console.log(response);
@@ -98,6 +129,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       setNewPostOpenTime(selectedPost?.openTime);
       setNewPostCloseTime(selectedPost?.closeTime);
       setNewPostCityId(selectedPost?.cityId);
+      setNewPostStatusId(selectedPost?.postStatusId);
     }
 
     fetchCities();
@@ -115,13 +147,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
             <span>Local</span>
           </Grid>
           <Grid item xs={12}>
-            <TextField
-              type={"file"}
-              className="form-text-input"
-              id="outlined-basic"
-              variant="standard"
-              placeholder="Informe o nome do local"
-            />
+            <input type="file" onChange={handleImageUpload} multiple />
           </Grid>
           <Grid item xs={12}>
             <TextField

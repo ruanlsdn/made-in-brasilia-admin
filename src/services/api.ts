@@ -11,6 +11,10 @@ export const createCityRequest = async (dto: iCreateCityDto) => {
   return await api.post("/city", dto);
 };
 
+export const uploadCityImagesRequest = async (form: FormData) => {
+  return await api.post("/city/images/upload", form);
+};
+
 export const listAllCityRequest = async () => {
   return await api.get("/city");
 };
@@ -39,6 +43,10 @@ export const getCityIaTextsRequest = async (cityName: string) => {
 // POST REQUEST
 export const createPostRequest = async (dto: iPostDto) => {
   return await api.post("/post", dto);
+};
+
+export const uploadPostImagesRequest = async (form: FormData) => {
+  return await api.post("/post/images/upload", form);
 };
 
 export const listPendingPostRequest = async (page: number | null) => {

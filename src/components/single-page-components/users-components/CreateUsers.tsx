@@ -34,8 +34,6 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       userTypeId: newUserType,
     };
 
-    console.log(dto);
-
     try {
       if (modalOption === 1) {
         const response = await createUserRequest(dto);
