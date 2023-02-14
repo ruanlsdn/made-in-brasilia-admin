@@ -1,7 +1,8 @@
 import axios from "axios";
 import iCreateCityDto from "../dtos/iCreateCityDto";
-import iUpdateCityDto from "../dtos/iUpdateCityDto";
 import { iPostDto } from "../dtos/iPostDto";
+import iUpdateCityDto from "../dtos/iUpdateCityDto";
+import { iUserDto } from "../dtos/iUserDto";
 
 const api = axios.create({ baseURL: "http://localhost:3000/" });
 
@@ -58,5 +59,24 @@ export const updatePostRequest = async (
 export const deletePostRequest = async (id: string | undefined) => {
   return await api.delete(`/post/${id}`);
 };
-
 // END OF POST REQUEST
+
+// USER REQUEST
+export const createUserRequest = async (dto: iUserDto) => {
+  return await api.post("/user", dto);
+};
+
+export const listAllPaginatedUserRequest = async (page: number | null) => {
+  return await api.get(`/user?page=${page}`);
+};
+
+export const updateUserRequest = async (
+  id: string | undefined,
+  dto: iUserDto
+) => {
+  return await api.put(`/user/${id}`, dto);
+};
+
+export const deleteUserRequest = async (id: string | undefined) => {
+  return await api.delete(`/user/${id}`);
+};

@@ -14,15 +14,27 @@ const SharedMenu = ({ entity, setModalOption }: SharedMenuProps) => {
   const { activeRoute } = useApplicationControlContext();
   const { anchorEl, setAnchorEl, setIsModalActive } =
     useApplicationControlContext();
-  const { setSelectedCity, setSelectedPost } = useDataControlContext();
+  const { setSelectedCity, setSelectedPost, setSelectedUser } =
+    useDataControlContext();
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
-    console.log(activeRoute);
-    if (activeRoute.path == "/cities") setSelectedCity(entity);
-    else {
-      setSelectedPost(entity);
+    switch (activeRoute.path) {
+      case "/cities":
+        setSelectedCity(entity);
+        break;
+
+      case "/posts":
+        setSelectedPost(entity);
+        break;
+
+      case "/users":
+        setSelectedUser(entity);
+        break;
+
+      default:
+        break;
     }
   };
 

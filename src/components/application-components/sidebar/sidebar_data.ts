@@ -63,7 +63,7 @@ export const SIDEBAR_DATA: SidebarData[] = [
       {
         icon: SlPeople,
         title: "Usuários",
-        description: "Página de gerenciamento da entidade Usuário",
+        description: "Página de gerenciamento da entidade User",
         path: "/users",
       },
     ],

@@ -1,16 +1,21 @@
 import React, { createContext, useContext, useState } from "react";
 import iCity from "../dtos/iCity";
 import { iPost } from "../dtos/iPost";
+import { iUser } from "../dtos/iUser";
 
 type DataControlContextProps = {
   refreshCityData: boolean;
   setRefreshCityData: React.Dispatch<React.SetStateAction<boolean>>;
   refreshPostData: boolean;
   setRefreshPostData: React.Dispatch<React.SetStateAction<boolean>>;
+  refreshUserData: boolean;
+  setRefreshUserData: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCity: iCity | null;
   setSelectedCity: React.Dispatch<React.SetStateAction<iCity | null>>;
   selectedPost: iPost | null;
   setSelectedPost: React.Dispatch<React.SetStateAction<iPost | null>>;
+  selectedUser: iUser | null;
+  setSelectedUser: React.Dispatch<React.SetStateAction<iUser | null>>;
 };
 
 const DataControlContext = createContext<DataControlContextProps>({
@@ -18,10 +23,14 @@ const DataControlContext = createContext<DataControlContextProps>({
   setRefreshCityData: () => {},
   refreshPostData: false,
   setRefreshPostData: () => {},
+  refreshUserData: false,
+  setRefreshUserData: () => {},
   selectedCity: null,
   setSelectedCity: () => {},
   selectedPost: null,
   setSelectedPost: () => {},
+  selectedUser: null,
+  setSelectedUser: () => {},
 });
 
 type ChildrenProps = {
@@ -31,8 +40,10 @@ type ChildrenProps = {
 export const DataControlProvider = ({ children }: ChildrenProps) => {
   const [refreshCityData, setRefreshCityData] = useState<boolean>(false);
   const [refreshPostData, setRefreshPostData] = useState<boolean>(false);
+  const [refreshUserData, setRefreshUserData] = useState<boolean>(false);
   const [selectedCity, setSelectedCity] = useState<iCity | null>(null);
   const [selectedPost, setSelectedPost] = useState<iPost | null>(null);
+  const [selectedUser, setSelectedUser] = useState<iUser | null>(null);
 
   return (
     <DataControlContext.Provider
@@ -41,10 +52,14 @@ export const DataControlProvider = ({ children }: ChildrenProps) => {
         setRefreshCityData,
         refreshPostData,
         setRefreshPostData,
+        refreshUserData,
+        setRefreshUserData,
         selectedCity,
         setSelectedCity,
         selectedPost,
         setSelectedPost,
+        selectedUser,
+        setSelectedUser,
       }}
     >
       {children}

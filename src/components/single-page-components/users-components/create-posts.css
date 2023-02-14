@@ -1,0 +1,37 @@
+.create-posts-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+}
+
+.create-posts-content button {
+  border: none;
+  background-color: unset;
+  cursor: pointer;
+}
+
+.create-posts-content button:hover {
+  color: green;
+}
+
+.create-posts-header {
+  font-family: var(--font-family);
+}
+
+.create-posts-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.create-posts-form span {
+  font-family: var(--font-family);
+  font-weight: bold;
+}
+
+.form-text-input {
+  width: 100%;
+}
