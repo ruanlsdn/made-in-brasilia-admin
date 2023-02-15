@@ -105,7 +105,7 @@ const PendingPosts = () => {
                   <TableCell align="center">
                     <span>{`${post.openTime} - ${post.closeTime}`}</span>
                   </TableCell>
-                  <TableCell align="center">
+                  <TableCell align="right">
                     <div className="pending-posts-thumbs-container">
                       <button
                         className="pending-posts-thumbs"
@@ -121,6 +121,7 @@ const PendingPosts = () => {
                       </button>
                     </div>
                   </TableCell>
+                  <TableCell />
                 </TableRow>
               ))}
             </TableBody>

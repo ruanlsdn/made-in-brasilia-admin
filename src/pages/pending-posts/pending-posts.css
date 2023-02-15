@@ -49,6 +49,8 @@
 .pending-posts-thumbs-container {
   display: flex;
   gap: 1rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .pending-posts-thumbs {
