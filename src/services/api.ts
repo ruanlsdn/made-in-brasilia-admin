@@ -50,7 +50,7 @@ export const uploadPostImagesRequest = async (form: FormData) => {
 };
 
 export const listPendingPostRequest = async (page: number | null) => {
-  return await api.get(`/post/pending?page=${page}`);
+  return await api.get(`/post/status/pending?page=${page}`);
 };
 
 export const listAllPostRequest = async (page: number | null) => {

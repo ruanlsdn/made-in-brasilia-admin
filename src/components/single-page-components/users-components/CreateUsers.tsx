@@ -23,12 +23,14 @@ type CreatePostsProps = {
 const CreatePosts = ({ modalOption }: CreatePostsProps) => {
   const { setIsModalActive } = useApplicationControlContext();
   const { selectedUser, setRefreshUserData } = useDataControlContext();
+  const [newEmail, setNewEmail] = useState<string>("");
   const [newUsername, setNewUsername] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [newUserType, setNewUserType] = useState<number>(0);
 
   const handleSubmit = async () => {
     const dto: iUserDto = {
+      email: newEmail,
       username: newUsername,
       password: newPassword,
       userTypeId: newUserType,
@@ -52,6 +54,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
 
   useEffect(() => {
     if (modalOption == 2) {
+      setNewEmail(selectedUser.email);
       setNewUsername(selectedUser.username);
       setNewPassword(selectedUser.password);
       setNewUserType(selectedUser.userType.id);
@@ -66,6 +69,17 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       </div>
       <div className="create-posts-form">
         <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              className="form-text-input"
+              id="outlined-basic"
+              variant="outlined"
+              label="Email"
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
+              placeholder="Informe um email"
+            />
+          </Grid>
           <Grid item xs={12}>
             <TextField
               className="form-text-input"
@@ -96,10 +110,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
                 id="demo-select-small"
                 label="Tipo"
                 value={newUserType}
-                onChange={(e) => {
-                  setNewUserType(Number(e.target.value));
-                  console.log(e.target.value);
-                }}
+                onChange={(e) => setNewUserType(Number(e.target.value))}
               >
                 <MenuItem value={0}>
                   <em>Selecione um tipo de usuário</em>

@@ -19,13 +19,13 @@ const CreateCities = () => {
   const [cityImages, setCityImages] = useState<FormData[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const array = e.target.files;
     let images: FormData[] = [];
 
-    for (let index = 0; index < array.length; index++) {
+    for (let index = 0; index < array!.length; index++) {
       const formData = new FormData();
-      formData.append("file", array[index]);
+      formData.append("file", array![index]);
       images.push(formData);
     }
 
@@ -53,7 +53,7 @@ const CreateCities = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await createCityRequest(cityDto);
+      const response = await createCityRequest(cityDto!);
 
       if (response.status == 201) {
         cityImages?.map((form) => {
@@ -80,7 +80,7 @@ const CreateCities = () => {
           novamente para gerar um novo texto.
         </p>
       </div>
-      <input type="file" onChange={handleImageUpload} multiple />
+      <input type="file" onChange={handleImageUpload} />
       <div className="create-cities-form">
         <TextField
           className="create-cities-form-input"

@@ -87,6 +87,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       closeTime: newPostCloseTime,
       cityId: newPostCityId,
       postStatusId: newPostStatusId,
+      postCategoryId: 1,
     };
 
     try {
