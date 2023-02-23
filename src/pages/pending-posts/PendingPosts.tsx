@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
 import { PagesHeader } from "../../components";
 import { useDataControlContext } from "../../contexts/DataControlContext";
-import { iPost } from "../../dtos/iPost";
-import { iPostDto } from "../../dtos/iPostDto";
+import { iPost } from "../../interfaces/iPost";
+import { iPostDto } from "../../interfaces/iPostDto";
 import { listPendingPostRequest, updatePostRequest } from "../../services/api";
 import "./pending-posts.css";
 

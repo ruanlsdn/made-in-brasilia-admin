@@ -5,7 +5,7 @@
 }
 
 .delete-cities-header {
-  font-family: var(-font-family);
+  font-family: var(--font-family);
 }
 
 .delete-cities-footer {

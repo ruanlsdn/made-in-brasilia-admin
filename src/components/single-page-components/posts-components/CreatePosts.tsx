@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
-import iCity from "../../../dtos/iCity";
-import { iPostDto } from "../../../dtos/iPostDto";
+import iCity from "../../../interfaces/iCity";
+import { iPostDto } from "../../../interfaces/iPostDto";
 import {
   createPostRequest,
   listAllCityRequest,

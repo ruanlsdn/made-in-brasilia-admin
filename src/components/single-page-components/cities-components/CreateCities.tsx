@@ -3,7 +3,7 @@ import { useState } from "react";
 import { BsCheck2, BsSearch } from "react-icons/bs";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
-import iCreateCityDto from "../../../dtos/iCreateCityDto";
+import iCreateCityDto from "../../../interfaces/iCreateCityDto";
 import {
   createCityRequest,
   getCityIaTextsRequest,

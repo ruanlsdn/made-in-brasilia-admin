@@ -1,10 +1,19 @@
 import axios from "axios";
-import iCreateCityDto from "../dtos/iCreateCityDto";
-import { iPostDto } from "../dtos/iPostDto";
-import iUpdateCityDto from "../dtos/iUpdateCityDto";
-import { iUserDto } from "../dtos/iUserDto";
+import iCreateCityDto from "../interfaces/iCreateCityDto";
+import { iLoginDto } from "../interfaces/iLoginDto";
+import { iPostDto } from "../interfaces/iPostDto";
+import iUpdateCityDto from "../interfaces/iUpdateCityDto";
+import { iUserDto } from "../interfaces/iUserDto";
 
-const api = axios.create({ baseURL: "http://localhost:3000/" });
+const api = axios.create({
+  baseURL: "http://localhost:3000",
+});
+
+// LOGIN REQUEST
+export const loginRequest = async (dto: iLoginDto) => {
+  return await api.post("/auth/login", dto);
+};
+// END OF LOGIN REQUEST
 
 // CITY REQUEST
 export const createCityRequest = async (dto: iCreateCityDto) => {
@@ -36,7 +45,7 @@ export const deleteCityRequest = async (id: string | undefined) => {
 };
 
 export const getCityIaTextsRequest = async (cityName: string) => {
-  return await api.get(`city/get-ai-texts/${cityName}`);
+  return await api.get(`/city/get-ai-texts/${cityName}`);
 };
 // END OF CITY REQUEST
 
@@ -72,6 +81,10 @@ export const deletePostRequest = async (id: string | undefined) => {
 // USER REQUEST
 export const createUserRequest = async (dto: iUserDto) => {
   return await api.post("/user", dto);
+};
+
+export const findUniqueUserRequest = async (id: string) => {
+  return await api.get(`/user/${id}`);
 };
 
 export const listAllPaginatedUserRequest = async (page: number | null) => {

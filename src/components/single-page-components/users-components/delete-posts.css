@@ -5,7 +5,7 @@
 }
 
 .delete-posts-header {
-  font-family: var(-font-family);
+  font-family: var(--font-family);
 }
 
 .delete-posts-footer {
@@ -14,6 +14,10 @@
   flex-direction: column;
   justify-content: center;
   gap: 1rem;
+}
+
+.delete-posts-footer p {
+  color: black;
 }
 
 .delete-posts-footer button {

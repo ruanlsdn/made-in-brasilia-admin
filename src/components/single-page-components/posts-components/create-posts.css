@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+.create-posts-header p {
+  color: black;
+}
+
 .create-posts-content button {
   border: none;
   background-color: unset;

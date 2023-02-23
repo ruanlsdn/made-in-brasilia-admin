@@ -1,23 +1,62 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { Sidebar, Topbar } from "./components";
+import { ProtectedLayout, Sidebar, Topbar } from "./components";
 import { useApplicationControlContext } from "./contexts/ApplicationControlContext";
+import { useAuthControlContext } from "./contexts/AuthControlContext";
 import { Cities, PendingPosts, Posts, Users, Welcome } from "./pages";
+import Login from "./pages/login/Login";
 
 function App() {
   const { isSidebarActive } = useApplicationControlContext();
+  const { currentUser } = useAuthControlContext();
 
   return (
     <div className="App">
-      {isSidebarActive && <Sidebar />}
+      {isSidebarActive && currentUser && <Sidebar />}
       <div className="App-content">
-        <Topbar />
+        {currentUser && <Topbar />}
         <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/cities" element={<Cities />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/pending-posts" element={<PendingPosts />} />
-          <Route path="/users" element={<Users />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/home"
+            element={
+              <ProtectedLayout>
+                <Welcome />
+              </ProtectedLayout>
+            }
+          />
+          <Route
+            path="/cities"
+            element={
+              <ProtectedLayout>
+                <Cities />
+              </ProtectedLayout>
+            }
+          />
+          <Route
+            path="/posts"
+            element={
+              <ProtectedLayout>
+                <Posts />
+              </ProtectedLayout>
+            }
+          />
+          <Route
+            path="/pending-posts"
+            element={
+              <ProtectedLayout>
+                <PendingPosts />
+              </ProtectedLayout>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <ProtectedLayout>
+                <Users />
+              </ProtectedLayout>
+            }
+          />
         </Routes>
       </div>
     </div>

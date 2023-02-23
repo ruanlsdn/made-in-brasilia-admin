@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
-import { iUserDto } from "../../../dtos/iUserDto";
+import { iUserDto } from "../../../interfaces/iUserDto";
 import { createUserRequest, updateUserRequest } from "../../../services/api";
 import "./create-posts.css";
 

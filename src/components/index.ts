@@ -1,3 +1,4 @@
+export { default as ProtectedLayout } from "./application-components/protected_layout/ProtectedLayout";
 export { default as Sidebar } from "./application-components//sidebar/Sidebar";
 export { default as Topbar } from "./application-components/topbar/Topbar";
 export { default as PagesHeader } from "./application-components//pages_header/PagesHeader";

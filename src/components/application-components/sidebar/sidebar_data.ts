@@ -25,7 +25,7 @@ export const SIDEBAR_DATA: SidebarData[] = [
         icon: AiOutlineHome,
         title: "Bem-vindo",
         description: "Página inicial",
-        path: "/",
+        path: "/home",
       },
     ],
   },

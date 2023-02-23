@@ -11,7 +11,7 @@ import CreateUsers from "../../components/single-page-components/users-component
 import DeleteUsers from "../../components/single-page-components/users-components/DeleteUsers";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../contexts/DataControlContext";
-import { iUser } from "../../dtos/iUser";
+import { iUser } from "../../interfaces/iUser";
 import { listAllPaginatedUserRequest } from "../../services/api";
 import "./users.css";
 

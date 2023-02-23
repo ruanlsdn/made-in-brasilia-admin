@@ -16,7 +16,7 @@ import {
 } from "../../components";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../contexts/DataControlContext";
-import iCity from "../../dtos/iCity";
+import iCity from "../../interfaces/iCity";
 import { listAllPaginatedCityRequest } from "../../services/api";
 import "./cities.css";
 

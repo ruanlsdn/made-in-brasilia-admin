@@ -3,7 +3,7 @@ import { useState } from "react";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
-import iUpdateCityDto from "../../../dtos/iUpdateCityDto";
+import iUpdateCityDto from "../../../interfaces/iUpdateCityDto";
 import { updateCityRequest } from "../../../services/api";
 import "./update-cities.css";
 

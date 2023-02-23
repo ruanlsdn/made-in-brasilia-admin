@@ -9,6 +9,10 @@ p {
   font-family: var(--font-family);
 }
 
+.create-cities-header p {
+  color: black;
+}
+
 .create-cities-form {
   display: flex;
   flex-direction: row;

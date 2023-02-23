@@ -15,7 +15,7 @@ import {
 } from "../../components";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../contexts/DataControlContext";
-import { iPost } from "../../dtos/iPost";
+import { iPost } from "../../interfaces/iPost";
 import { listAllPostRequest } from "../../services/api";
 import "./posts.css";
 

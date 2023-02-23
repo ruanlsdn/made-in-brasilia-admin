@@ -5,6 +5,10 @@
   width: 100%;
 }
 
+.update-cities-header p {
+  color: black;
+}
+
 .update-cities-content button {
   border: none;
   background-color: unset;

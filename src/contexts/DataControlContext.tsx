@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
-import iCity from "../dtos/iCity";
-import { iPost } from "../dtos/iPost";
-import { iUser } from "../dtos/iUser";
+import iCity from "../interfaces/iCity";
+import { iPost } from "../interfaces/iPost";
+import { iUser } from "../interfaces/iUser";
 
 type DataControlContextProps = {
   refreshCityData: boolean;

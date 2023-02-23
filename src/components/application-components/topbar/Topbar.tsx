@@ -5,11 +5,13 @@ import {
   IoPersonOutline,
 } from "react-icons/io5";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
+import { useAuthControlContext } from "../../../contexts/AuthControlContext";
 import "./topbar.css";
 
 const Topbar = () => {
   const { screenSize, setScreenSize, setSearchText, setIsSidebarActive } =
     useApplicationControlContext();
+  const { signOut } = useAuthControlContext();
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -43,10 +45,9 @@ const Topbar = () => {
         </div> */}
       </div>
       <div className="topbar-user">
-        <button onClick={() => {}}>
+        <a href="/login" onClick={signOut}>
           <IoPersonOutline size={20} />
-          <span>Logout</span>
-        </button>
+        </a>
       </div>
     </div>
   );

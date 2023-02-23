@@ -4,8 +4,13 @@
   gap: 3rem;
 }
 
-.delete-posts-header {
-  font-family: var(-font-family);
+.delete-posts-header h1,
+p {
+  font-family: var(--font-family);
+}
+
+.delete-posts-header p {
+  color: black;
 }
 
 .delete-posts-footer {
