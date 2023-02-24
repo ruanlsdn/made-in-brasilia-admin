@@ -42,6 +42,9 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
   const [newPostDescription, setNewPostDescription] = useState<
     string | undefined
   >("");
+  const [newPostLocation, setNewPostLocation] = useState<string | undefined>(
+    ""
+  );
   const [newPostOpenTime, setNewPostOpenTime] = useState<string | undefined>(
     ""
   );
@@ -56,13 +59,13 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
   const [newPostStatusId, setNewPostStatusId] = useState<number | undefined>(1);
   const [postImages, setPostImages] = useState<FormData[] | null>(null);
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const array = e.target.files;
     let images: FormData[] = [];
 
-    for (let index = 0; index < array.length; index++) {
+    for (let index = 0; index < array!.length; index++) {
       const formData = new FormData();
-      formData.append("file", array[index]);
+      formData.append("file", array![index]);
       images.push(formData);
     }
 
@@ -81,6 +84,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     const dto: iPostDto = {
       name: newPostName,
       text: newPostDescription,
+      location: newPostLocation,
       openDay: newPostOpenDay,
       closeDay: newPostCloseDay,
       openTime: newPostOpenTime,
@@ -102,7 +106,6 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
         }
       } else {
         const response = await updatePostRequest(selectedPost?.id, dto);
-        console.log(response);
       }
     } catch (error) {
       console.log(error);
@@ -125,6 +128,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     if (modalOption == 2) {
       setNewPostName(selectedPost?.name);
       setNewPostDescription(selectedPost?.text);
+      setNewPostLocation(selectedPost?.location);
       setNewPostOpenDay(selectedPost?.openDay);
       setNewPostCloseDay(selectedPost?.closeDay);
       setNewPostOpenTime(selectedPost?.openTime);
@@ -170,6 +174,17 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
               onChange={(e) => setNewPostDescription(e.target.value)}
               variant="outlined"
               placeholder="Informe uma breve descrição sobre o local"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              className="form-text-input"
+              id="outlined-basic"
+              label="Localização"
+              value={newPostLocation}
+              onChange={(e) => setNewPostLocation(e.target.value)}
+              variant="outlined"
+              placeholder="Informe um link com a localização do local"
             />
           </Grid>
           <Grid item xs={12}>

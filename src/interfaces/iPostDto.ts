@@ -1,6 +1,7 @@
 export interface iPostDto {
   name?: string;
   text?: string;
+  location?: string;
   openDay?: string;
   closeDay?: string;
   openTime?: string;

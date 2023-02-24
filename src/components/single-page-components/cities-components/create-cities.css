@@ -43,6 +43,10 @@ p {
   font-size: 18px;
 }
 
+.create-cities-ia-response p {
+  color: var(--primary-color);
+}
+
 .create-cities-footer {
   display: flex;
   flex-direction: row;
