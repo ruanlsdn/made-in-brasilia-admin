@@ -4,6 +4,7 @@ import {
   IoSearchOutline,
   IoPersonOutline,
 } from "react-icons/io5";
+import { Link } from "react-router-dom";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { useAuthControlContext } from "../../../contexts/AuthControlContext";
 import "./topbar.css";
@@ -45,9 +46,9 @@ const Topbar = () => {
         </div> */}
       </div>
       <div className="topbar-user">
-        <a href="/login" onClick={signOut}>
+        <Link to="/login" onClick={signOut}>
           <IoPersonOutline size={20} />
-        </a>
+        </Link>
       </div>
     </div>
   );
