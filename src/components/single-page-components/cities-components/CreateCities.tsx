@@ -10,6 +10,7 @@ import {
   uploadCityImagesRequest,
 } from "../../../services/api";
 import "./create-cities.css";
+import { AxiosError } from "axios";
 
 const CreateCities = () => {
   const { setRefreshCityData } = useDataControlContext();
@@ -43,9 +44,9 @@ const CreateCities = () => {
       const response = await getCityIaTextsRequest(cityName);
       setCityDto({ ...response.data, name: cityName });
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
     setIsLoading(false);
@@ -55,9 +56,9 @@ const CreateCities = () => {
     try {
       await uploadCityImagesRequest(form);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };
@@ -73,9 +74,9 @@ const CreateCities = () => {
         });
       }
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
     setCityDto(null);

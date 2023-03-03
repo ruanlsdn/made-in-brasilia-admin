@@ -5,6 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import {
   CreateCities,
@@ -37,9 +38,9 @@ const Cities = () => {
       const response = await listAllPaginatedCityRequest(page - 1);
       setCities(response.data);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };
@@ -49,9 +50,9 @@ const Cities = () => {
       const response = await listAllPaginatedCityRequest(null);
       setCities(response.data);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };

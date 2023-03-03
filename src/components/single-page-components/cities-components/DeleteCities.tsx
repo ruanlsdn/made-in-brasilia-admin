@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import React from "react";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
@@ -19,9 +20,9 @@ const DeleteCities = () => {
       const response = await deleteCityRequest(selectedCity?.id);
       setRefreshCityData((prev) => !prev);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
     setIsModalActive(false);

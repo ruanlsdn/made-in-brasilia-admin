@@ -5,6 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import {
   PagesHeader,
@@ -36,9 +37,9 @@ const Users = () => {
       const response = await listAllPaginatedUserRequest(page - 1);
       setUsers(response.data);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };
@@ -48,9 +49,9 @@ const Users = () => {
       const response = await listAllPaginatedUserRequest(0);
       setUsers(response.data);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };

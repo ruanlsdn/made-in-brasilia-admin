@@ -47,9 +47,7 @@ export const AuthControlProvider = ({ children }: ChildrenProps) => {
       }
     } catch (error) {
       const axiosError = error as AxiosError;
-      throw new Error(
-        `${axiosError.response?.status} - ${axiosError.response?.statusText}`
-      );
+      throw new Error(axiosError.message);
     }
     return false;
   };

@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
@@ -18,9 +19,9 @@ const DeleteUsers = () => {
       const response = await deleteUserRequest(selectedUser?.id);
       setRefreshUserData((prev) => !prev);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
     setIsModalActive(false);

@@ -6,6 +6,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
@@ -81,9 +82,9 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     try {
       await uploadPostImagesRequest(form);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };
@@ -116,9 +117,9 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
         const response = await updatePostRequest(selectedPost?.id, dto);
       }
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
 
@@ -131,9 +132,9 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       const response = await listAllCityRequest();
       setCities(response.data);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };

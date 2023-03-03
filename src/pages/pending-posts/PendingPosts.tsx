@@ -5,6 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
 import { PagesHeader, SharedSnackbar } from "../../components";
@@ -26,9 +27,9 @@ const PendingPosts = () => {
       const response = await listPendingPostRequest(page - 1);
       setPosts(response.data);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };
@@ -40,9 +41,9 @@ const PendingPosts = () => {
       };
       const response = await updatePostRequest(id, dto);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
     setRefreshPostData((prev) => !prev);
@@ -55,9 +56,9 @@ const PendingPosts = () => {
       };
       const response = await updatePostRequest(id, dto);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
     setRefreshPostData((prev) => !prev);
@@ -68,9 +69,9 @@ const PendingPosts = () => {
       const response = await listPendingPostRequest(0);
       setPosts(response.data);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
   };

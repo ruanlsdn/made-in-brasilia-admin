@@ -1,4 +1,5 @@
 import { Grid, TextField } from "@mui/material";
+import { AxiosError } from "axios";
 import { useState } from "react";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
@@ -30,9 +31,9 @@ const UpdateCities = () => {
       const response = await updateCityRequest(selectedCity?.id, dto);
       setRefreshCityData((prev) => !prev);
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
 

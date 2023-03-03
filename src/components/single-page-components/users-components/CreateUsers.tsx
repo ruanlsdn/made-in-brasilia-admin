@@ -6,6 +6,7 @@ import {
   Select,
   TextField,
 } from "@mui/material";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
@@ -48,9 +49,9 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
         const response = await updateUserRequest(selectedUser?.id, dto);
       }
     } catch (error) {
-      const err = error as Error;
+      const axiosError = error as AxiosError;
       setIsSnackbarOpen(true);
-      setSnackbarMessage(err.message);
+      setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
 
