@@ -13,7 +13,12 @@ import "./create-cities.css";
 
 const CreateCities = () => {
   const { setRefreshCityData } = useDataControlContext();
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
   const [cityName, setCityName] = useState("");
   const [cityDto, setCityDto] = useState<iCreateCityDto | null>(null);
   const [cityImages, setCityImages] = useState<FormData[] | null>(null);
@@ -37,8 +42,11 @@ const CreateCities = () => {
     try {
       const response = await getCityIaTextsRequest(cityName);
       setCityDto({ ...response.data, name: cityName });
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
     setIsLoading(false);
   };
@@ -47,7 +55,10 @@ const CreateCities = () => {
     try {
       await uploadCityImagesRequest(form);
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -61,8 +72,11 @@ const CreateCities = () => {
           upload(form);
         });
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
     setCityDto(null);
     setCityImages(null);

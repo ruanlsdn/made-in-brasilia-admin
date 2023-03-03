@@ -1,3 +1,4 @@
+import { AxiosError } from "axios";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { iLoginDto } from "../interfaces/iLoginDto";
@@ -45,7 +46,10 @@ export const AuthControlProvider = ({ children }: ChildrenProps) => {
         return true;
       }
     } catch (error) {
-      console.log(error);
+      const axiosError = error as AxiosError;
+      throw new Error(
+        `${axiosError.response?.status} - ${axiosError.response?.statusText}`
+      );
     }
     return false;
   };

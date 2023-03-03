@@ -7,15 +7,22 @@ import "./delete-cities.css";
 
 const DeleteCities = () => {
   const { selectedCity, setRefreshCityData } = useDataControlContext();
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
 
   const handleDelete = async () => {
     try {
       const response = await deleteCityRequest(selectedCity?.id);
       setRefreshCityData((prev) => !prev);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
     setIsModalActive(false);
   };

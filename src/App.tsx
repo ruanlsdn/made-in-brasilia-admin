@@ -16,6 +16,7 @@ function App() {
       <div className="App-content">
         {currentUser && <Topbar />}
         <Routes>
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/home"

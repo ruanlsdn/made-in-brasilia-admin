@@ -36,7 +36,12 @@ type CreatePostsProps = {
 
 const CreatePosts = ({ modalOption }: CreatePostsProps) => {
   const { selectedPost, setRefreshPostData } = useDataControlContext();
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
   const [cities, setCities] = useState<iCity[]>([]);
   const [newPostName, setNewPostName] = useState<string | undefined>("");
   const [newPostDescription, setNewPostDescription] = useState<
@@ -76,7 +81,10 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     try {
       await uploadPostImagesRequest(form);
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -108,7 +116,10 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
         const response = await updatePostRequest(selectedPost?.id, dto);
       }
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
 
     setRefreshPostData((prev) => !prev);
@@ -120,7 +131,10 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       const response = await listAllCityRequest();
       setCities(response.data);
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 

@@ -12,6 +12,7 @@ import {
   PagesHeader,
   SharedMenu,
   SharedModal,
+  SharedSnackbar,
   UpdateCities,
 } from "../../components";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
@@ -21,7 +22,12 @@ import { listAllPaginatedCityRequest } from "../../services/api";
 import "./cities.css";
 
 const Cities = () => {
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
   const { refreshCityData } = useDataControlContext();
   const [cities, setCities] = useState<iCity[] | []>([]);
   const [modalOption, setModalOption] = useState<number>(0);
@@ -30,8 +36,11 @@ const Cities = () => {
     try {
       const response = await listAllPaginatedCityRequest(page - 1);
       setCities(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -39,8 +48,11 @@ const Cities = () => {
     try {
       const response = await listAllPaginatedCityRequest(null);
       setCities(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -118,6 +130,7 @@ const Cities = () => {
       {modalOption == 1 && <SharedModal children={<CreateCities />} />}
       {modalOption == 2 && <SharedModal children={<UpdateCities />} />}
       {modalOption == 3 && <SharedModal children={<DeleteCities />} />}
+      <SharedSnackbar />
     </div>
   );
 };

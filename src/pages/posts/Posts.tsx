@@ -12,6 +12,7 @@ import {
   PagesHeader,
   SharedMenu,
   SharedModal,
+  SharedSnackbar,
 } from "../../components";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../contexts/DataControlContext";
@@ -20,7 +21,12 @@ import { listAllPostRequest } from "../../services/api";
 import "./posts.css";
 
 const Posts = () => {
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
   const { refreshPostData } = useDataControlContext();
   const [posts, setPosts] = useState<iPost[] | []>([]);
   const [modalOption, setModalOption] = useState<number>(0);
@@ -29,8 +35,11 @@ const Posts = () => {
     try {
       const response = await listAllPostRequest(page - 1);
       setPosts(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -38,8 +47,11 @@ const Posts = () => {
     try {
       const response = await listAllPostRequest(0);
       setPosts(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -119,6 +131,7 @@ const Posts = () => {
       ) : (
         <SharedModal children={<DeletePosts />} />
       )}
+      <SharedSnackbar />
     </div>
   );
 };

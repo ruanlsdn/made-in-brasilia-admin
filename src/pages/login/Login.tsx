@@ -1,15 +1,19 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SharedSnackbar } from "../../components";
+import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
 import { useAuthControlContext } from "../../contexts/AuthControlContext";
 import { iLoginDto } from "../../interfaces/iLoginDto";
 import "./login.css";
 
 const Login = () => {
+  const { signIn } = useAuthControlContext();
+  const { setIsSnackbarOpen, setSnackbarMessage, setSnackbarSeverity } =
+    useApplicationControlContext();
   const [newUsername, setNewUsername] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const navigate = useNavigate();
-  const { signIn } = useAuthControlContext();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,9 +23,15 @@ const Login = () => {
       password: newPassword,
     };
 
-    const response = await signIn(dto);
-
-    if (response) navigate("/home");
+    try {
+      const response = await signIn(dto);
+      if (response) navigate("/home");
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
+    }
   };
 
   return (
@@ -52,8 +62,8 @@ const Login = () => {
             <span>Entrar</span>
           </button>
         </form>
-        <div></div>
       </div>
+      <SharedSnackbar />
     </div>
   );
 };

@@ -15,28 +15,18 @@ type ApplicationControlContextProps = {
   setAnchorEl: React.Dispatch<React.SetStateAction<null | HTMLElement>>;
   activeRoute: Links;
   setActiveRoute: React.Dispatch<React.SetStateAction<Links>>;
+  isSnackbarOpen: boolean;
+  setIsSnackbarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  snackbarMessage: string;
+  setSnackbarMessage: React.Dispatch<React.SetStateAction<string>>;
+  snackbarSeverity: "success" | "warning" | "error" | undefined;
+  setSnackbarSeverity: React.Dispatch<
+    React.SetStateAction<"success" | "warning" | "error" | undefined>
+  >;
 };
 
 const ApplicationControlContext = createContext<ApplicationControlContextProps>(
-  {
-    screenSize: undefined,
-    setScreenSize: () => {},
-    searchText: null,
-    setSearchText: () => {},
-    isSidebarActive: true,
-    setIsSidebarActive: () => {},
-    isModalActive: true,
-    setIsModalActive: () => {},
-    anchorEl: null,
-    setAnchorEl: () => {},
-    activeRoute: {
-      icon: SlHome,
-      title: "Bem-vindo",
-      description: "Página inicial",
-      path: "/",
-    },
-    setActiveRoute: () => {},
-  }
+  null!
 );
 
 type ChildrenProps = {
@@ -53,8 +43,13 @@ export const ApplicationControlProvider = ({ children }: ChildrenProps) => {
     icon: SlHome,
     title: "Bem-vindo",
     description: "Página inicial",
-    path: "/",
+    path: "/home",
   });
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState<
+    "success" | "warning" | "error" | undefined
+  >(undefined);
 
   return (
     <ApplicationControlContext.Provider
@@ -71,6 +66,12 @@ export const ApplicationControlProvider = ({ children }: ChildrenProps) => {
         setAnchorEl,
         activeRoute,
         setActiveRoute,
+        isSnackbarOpen,
+        setIsSnackbarOpen,
+        snackbarMessage,
+        setSnackbarMessage,
+        snackbarSeverity,
+        setSnackbarSeverity,
       }}
     >
       {children}

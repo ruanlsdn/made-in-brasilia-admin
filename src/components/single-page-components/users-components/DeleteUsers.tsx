@@ -1,20 +1,27 @@
 import { BsCheck2 } from "react-icons/bs";
 import { useApplicationControlContext } from "../../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
-import { deletePostRequest, deleteUserRequest } from "../../../services/api";
+import { deleteUserRequest } from "../../../services/api";
 import "./delete-posts.css";
 
 const DeleteUsers = () => {
   const { selectedUser, setRefreshUserData } = useDataControlContext();
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
 
   const handleDelete = async () => {
     try {
       const response = await deleteUserRequest(selectedUser?.id);
       setRefreshUserData((prev) => !prev);
-      console.log(response);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
     setIsModalActive(false);
   };

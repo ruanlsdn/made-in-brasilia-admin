@@ -9,7 +9,12 @@ import "./update-cities.css";
 
 const UpdateCities = () => {
   const { selectedCity, setRefreshCityData } = useDataControlContext();
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
   const [newCityName, setNewCityName] = useState(selectedCity?.name);
   const [newCityTitle, setNewCityTitle] = useState(selectedCity?.title);
   const [newCityText, setNewCityText] = useState(selectedCity?.text);
@@ -25,7 +30,10 @@ const UpdateCities = () => {
       const response = await updateCityRequest(selectedCity?.id, dto);
       setRefreshCityData((prev) => !prev);
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
 
     setIsModalActive(false);

@@ -7,7 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
 import { FiThumbsDown, FiThumbsUp } from "react-icons/fi";
-import { PagesHeader } from "../../components";
+import { PagesHeader, SharedSnackbar } from "../../components";
+import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
 import { useDataControlContext } from "../../contexts/DataControlContext";
 import { iPost } from "../../interfaces/iPost";
 import { iPostDto } from "../../interfaces/iPostDto";
@@ -16,14 +17,19 @@ import "./pending-posts.css";
 
 const PendingPosts = () => {
   const { refreshPostData, setRefreshPostData } = useDataControlContext();
+  const { setIsSnackbarOpen, setSnackbarMessage, setSnackbarSeverity } =
+    useApplicationControlContext();
   const [posts, setPosts] = useState<iPost[] | []>([]);
 
   const handlePaginationChange = async (page: number) => {
     try {
       const response = await listPendingPostRequest(page - 1);
       setPosts(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -34,7 +40,10 @@ const PendingPosts = () => {
       };
       const response = await updatePostRequest(id, dto);
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
     setRefreshPostData((prev) => !prev);
   };
@@ -46,7 +55,10 @@ const PendingPosts = () => {
       };
       const response = await updatePostRequest(id, dto);
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
     setRefreshPostData((prev) => !prev);
   };
@@ -55,8 +67,11 @@ const PendingPosts = () => {
     try {
       const response = await listPendingPostRequest(0);
       setPosts(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -134,6 +149,7 @@ const PendingPosts = () => {
           onChange={(e, page) => handlePaginationChange(page)}
         />
       </div>
+      <SharedSnackbar />
     </div>
   );
 };

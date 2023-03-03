@@ -21,7 +21,12 @@ type CreatePostsProps = {
 };
 
 const CreatePosts = ({ modalOption }: CreatePostsProps) => {
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
   const { selectedUser, setRefreshUserData } = useDataControlContext();
   const [newEmail, setNewEmail] = useState<string>("");
   const [newUsername, setNewUsername] = useState<string>("");
@@ -39,13 +44,14 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     try {
       if (modalOption === 1) {
         const response = await createUserRequest(dto);
-        console.log(response);
       } else {
         const response = await updateUserRequest(selectedUser?.id, dto);
-        console.log(response);
       }
     } catch (error) {
-      console.log(error);
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
 
     setRefreshUserData((prev) => !prev);
@@ -54,10 +60,10 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
 
   useEffect(() => {
     if (modalOption == 2) {
-      setNewEmail(selectedUser.email);
-      setNewUsername(selectedUser.username);
-      setNewPassword(selectedUser.password);
-      setNewUserType(selectedUser.userType.id);
+      setNewEmail(selectedUser!.email);
+      setNewUsername(selectedUser!.username);
+      setNewPassword(selectedUser!.password);
+      setNewUserType(selectedUser!.userType.id);
     }
   }, []);
 

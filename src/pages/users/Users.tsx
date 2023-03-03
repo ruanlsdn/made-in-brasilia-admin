@@ -6,7 +6,12 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useEffect, useState } from "react";
-import { PagesHeader, SharedMenu, SharedModal } from "../../components";
+import {
+  PagesHeader,
+  SharedMenu,
+  SharedModal,
+  SharedSnackbar,
+} from "../../components";
 import CreateUsers from "../../components/single-page-components/users-components/CreateUsers";
 import DeleteUsers from "../../components/single-page-components/users-components/DeleteUsers";
 import { useApplicationControlContext } from "../../contexts/ApplicationControlContext";
@@ -16,7 +21,12 @@ import { listAllPaginatedUserRequest } from "../../services/api";
 import "./users.css";
 
 const Users = () => {
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
   const { refreshUserData } = useDataControlContext();
   const [users, setUsers] = useState<iUser[] | []>([]);
   const [modalOption, setModalOption] = useState<number>(0);
@@ -25,8 +35,11 @@ const Users = () => {
     try {
       const response = await listAllPaginatedUserRequest(page - 1);
       setUsers(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -34,8 +47,11 @@ const Users = () => {
     try {
       const response = await listAllPaginatedUserRequest(0);
       setUsers(response.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
   };
 
@@ -109,6 +125,7 @@ const Users = () => {
       ) : (
         <SharedModal children={<DeleteUsers />} />
       )}
+      <SharedSnackbar />
     </div>
   );
 };

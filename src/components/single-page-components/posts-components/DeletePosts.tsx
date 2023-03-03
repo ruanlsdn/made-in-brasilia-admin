@@ -6,15 +6,23 @@ import "./delete-posts.css";
 
 const DeleteCities = () => {
   const { selectedPost, setRefreshPostData } = useDataControlContext();
-  const { setIsModalActive } = useApplicationControlContext();
+  const {
+    setIsModalActive,
+    setIsSnackbarOpen,
+    setSnackbarMessage,
+    setSnackbarSeverity,
+  } = useApplicationControlContext();
 
   const handleDelete = async () => {
     try {
       const response = await deletePostRequest(selectedPost?.id);
       setRefreshPostData((prev) => !prev);
       console.log(response);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const err = error as Error;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(err.message);
+      setSnackbarSeverity("error");
     }
     setIsModalActive(false);
   };
