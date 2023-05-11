@@ -41,9 +41,14 @@ export const AuthControlProvider = ({ children }: ChildrenProps) => {
     try {
       const response = await loginRequest(dto);
       if (response.status == 201) {
-        setCurrentUser(response.data);
-        localStorage.setItem("user", response.data.id);
-        return true;
+        const user: iUser = response.data;
+        if (user.userTypeId === 2) {
+          setCurrentUser(response.data);
+          localStorage.setItem("user", response.data.id);
+          return true;
+        } else {
+          throw new Error("Request failed with status code 403");
+        }
       }
     } catch (error) {
       const axiosError = error as AxiosError;

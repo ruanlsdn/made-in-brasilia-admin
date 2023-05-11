@@ -15,7 +15,7 @@ import { iUserDto } from "../../../interfaces/iUserDto";
 import { createUserRequest, updateUserRequest } from "../../../services/api";
 import "./create-posts.css";
 
-const USER_TYPES = ["COMUM", "MODERADOR", "ADMINISTRADOR"];
+const USER_TYPES = ["COMUM", "ADMINISTRADOR"];
 
 type CreatePostsProps = {
   modalOption: number;
@@ -64,7 +64,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       setNewEmail(selectedUser!.email);
       setNewUsername(selectedUser!.username);
       setNewPassword(selectedUser!.password);
-      setNewUserType(selectedUser!.userType.id);
+      setNewUserType(selectedUser!.userTypeId);
     }
   }, []);
 
