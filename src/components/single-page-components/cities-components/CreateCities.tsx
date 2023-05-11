@@ -1,4 +1,4 @@
-import { CircularProgress, TextField } from "@mui/material";
+import { CircularProgress, Grid, TextField } from "@mui/material";
 import { useState } from "react";
 import { BsCheck2, BsSearch } from "react-icons/bs";
 import { useDataControlContext } from "../../../contexts/DataControlContext";
@@ -21,7 +21,8 @@ const CreateCities = () => {
     setSnackbarSeverity,
   } = useApplicationControlContext();
   const [cityName, setCityName] = useState("");
-  const [cityDto, setCityDto] = useState<iCreateCityDto | null>(null);
+  const [cityTitle, setCityTitle] = useState("");
+  const [cityHistory, setCityHistory] = useState("");
   const [cityImages, setCityImages] = useState<FormData[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -64,6 +65,12 @@ const CreateCities = () => {
   };
 
   const handleSubmit = async () => {
+    const cityDto: iCreateCityDto = {
+      name: cityName,
+      title: cityTitle,
+      text: cityHistory,
+    };
+
     try {
       const response = await createCityRequest(cityDto!);
 
@@ -79,7 +86,6 @@ const CreateCities = () => {
       setSnackbarMessage(axiosError.message);
       setSnackbarSeverity("error");
     }
-    setCityDto(null);
     setCityImages(null);
     setRefreshCityData((prev) => !prev);
     setIsModalActive(false);
@@ -89,33 +95,50 @@ const CreateCities = () => {
     <div className="create-cities-content">
       <div className="create-cities-header">
         <h1>Adicionar cidade</h1>
-        <p>
-          Este cadastro é automatizado por inteligência artificial. Preencha o
-          nome da cidade, aguarde o resultado e confirme para salvar ou tente
-          novamente para gerar um novo texto.
-        </p>
+        <p>Preencha os campos abaixo com as informações da cidade</p>
       </div>
-      <input type="file" onChange={handleImageUpload} />
       <div className="create-cities-form">
-        <TextField
-          className="create-cities-form-input"
-          id="outlined-basic"
-          label="Nome da cidade"
-          placeholder="Informe o nome da cidade..."
-          variant="outlined"
-          onChange={(e) => setCityName(e.target.value)}
-        />
-        <button className="gradient-bg-colorful" onClick={handleSearchClick}>
-          <BsSearch size={30} />
-        </button>
-      </div>
-
-      <div className="create-cities-ia-response">
-        <CircularProgress
-          style={{ display: `${isLoading ? "flex" : "none"}` }}
-        />
-        <h3>{cityDto?.title}</h3>
-        <p>{cityDto?.text}</p>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <span>Local</span>
+          </Grid>
+          <Grid item xs={12}>
+            <input type="file" onChange={handleImageUpload} />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              className="form-text-input"
+              id="outlined-basic"
+              label="Nome"
+              placeholder="Informe o nome da cidade..."
+              variant="outlined"
+              onChange={(e) => setCityName(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <span>Glossário</span>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              className="form-text-input"
+              id="outlined-basic"
+              label="Título"
+              placeholder="Informe um título para a cidade..."
+              variant="outlined"
+              onChange={(e) => setCityTitle(e.target.value)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              className="form-text-input"
+              id="outlined-basic"
+              label="História"
+              placeholder="Informe uma breve história da cidade..."
+              variant="outlined"
+              onChange={(e) => setCityHistory(e.target.value)}
+            />
+          </Grid>
+        </Grid>
       </div>
       <div className="create-cities-footer">
         <button onClick={handleSubmit}>

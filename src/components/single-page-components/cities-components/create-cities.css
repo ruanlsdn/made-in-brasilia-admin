@@ -33,6 +33,11 @@ p {
   border-radius: 15px;
 }
 
+.create-cities-form span {
+  font-family: var(--font-family);
+  font-weight: bold;
+}
+
 .create-cities-ia-response {
   display: flex;
   flex-direction: column;
@@ -63,4 +68,8 @@ p {
 
 .create-cities-footer button:hover {
   color: green;
+}
+
+.form-text-input {
+  width: 100%;
 }

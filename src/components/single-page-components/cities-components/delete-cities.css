@@ -8,6 +8,11 @@
   font-family: var(--font-family);
 }
 
+.delete-cities-header p,
+.delete-cities-footer p {
+  color: black;
+}
+
 .delete-cities-footer {
   display: flex;
   align-items: center;
