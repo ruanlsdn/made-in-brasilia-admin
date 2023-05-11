@@ -3,5 +3,9 @@ export interface iUser {
   email: string;
   username: string;
   password: string;
+  userType: {
+    id: number;
+    description: string;
+  };
   userTypeId: number;
 }
