@@ -16,10 +16,12 @@ import { iPostDto } from "../../../interfaces/iPostDto";
 import {
   createPostRequest,
   listAllCityRequest,
+  listAllPostCategoriesRequest,
   updatePostRequest,
   uploadPostImagesRequest,
 } from "../../../services/api";
 import "./create-posts.css";
+import { iCategory } from "../../../interfaces/iCategory";
 
 const WEEK_DAYS = [
   "SEGUNDA-FEIRA",
@@ -44,6 +46,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     setSnackbarSeverity,
   } = useApplicationControlContext();
   const [cities, setCities] = useState<iCity[]>([]);
+  const [categories, setCategories] = useState<iCategory[]>([]);
   const [newPostName, setNewPostName] = useState<string | undefined>("");
   const [newPostDescription, setNewPostDescription] = useState<
     string | undefined
@@ -63,6 +66,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
   );
   const [newPostCityId, setNewPostCityId] = useState<string | undefined>("");
   const [newPostStatusId, setNewPostStatusId] = useState<number | undefined>(1);
+  const [newPostCategory, setNewPostCategory] = useState("");
   const [postImages, setPostImages] = useState<FormData[] | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -100,7 +104,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       closeTime: newPostCloseTime,
       cityId: newPostCityId,
       postStatusId: newPostStatusId,
-      postCategoryId: 1,
+      postCategoryId: newPostCategory,
     };
 
     try {
@@ -139,6 +143,18 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
     }
   };
 
+  const fetchCategories = async () => {
+    try {
+      const response = await listAllPostCategoriesRequest();
+      setCategories(response.data);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      setIsSnackbarOpen(true);
+      setSnackbarMessage(axiosError.message);
+      setSnackbarSeverity("error");
+    }
+  };
+
   useEffect(() => {
     if (modalOption == 2) {
       setNewPostName(selectedPost?.name);
@@ -150,9 +166,11 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
       setNewPostCloseTime(selectedPost?.closeTime);
       setNewPostCityId(selectedPost?.cityId);
       setNewPostStatusId(selectedPost?.postStatusId);
+      setNewPostCategory(selectedPost?.postCategory.id);
     }
 
     fetchCities();
+    fetchCategories();
   }, []);
 
   return (
@@ -201,6 +219,27 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
               variant="outlined"
               placeholder="Informe um link com a localização do local"
             />
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl sx={{ minWidth: "100%" }}>
+              <InputLabel id="demo-select-small">Categoria</InputLabel>
+              <Select
+                labelId="demo-select-small"
+                id="demo-select-small"
+                label="Categoria"
+                value={newPostCategory}
+                onChange={(e) => setNewPostCategory(e.target.value)}
+              >
+                <MenuItem value="">
+                  <em>Selecione uma categoria</em>
+                </MenuItem>
+                {categories.map((category, index) => (
+                  <MenuItem key={index} value={category.id}>
+                    {category.description}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
           <Grid item xs={12}>
             <span>Funcionamento</span>

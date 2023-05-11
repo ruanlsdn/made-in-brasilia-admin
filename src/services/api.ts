@@ -66,6 +66,10 @@ export const listAllPostRequest = async (page: number | null) => {
   return await api.get(`/post?page=${page}`);
 };
 
+export const listAllPostCategoriesRequest = async () => {
+  return await api.get("post-category");
+};
+
 export const updatePostRequest = async (
   id: string | undefined,
   dto: iPostDto

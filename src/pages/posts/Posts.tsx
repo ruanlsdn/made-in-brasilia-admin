@@ -92,6 +92,9 @@ const Posts = () => {
                 <TableCell align="center">
                   <h3>HORÁRIO DE FUNCIONAMENTO</h3>
                 </TableCell>
+                <TableCell align="center">
+                  <h3>CATEGORIA</h3>
+                </TableCell>
                 <TableCell />
                 <TableCell />
               </TableRow>
@@ -110,6 +113,9 @@ const Posts = () => {
                   </TableCell>
                   <TableCell align="center">
                     <span>{`${post.openTime} - ${post.closeTime}`}</span>
+                  </TableCell>
+                  <TableCell align="center">
+                    <span>{post.postCategory.description}</span>
                   </TableCell>
                   <TableCell />
                   <TableCell>

@@ -8,5 +8,9 @@ export interface iPost {
   openTime: string;
   closeTime: string;
   cityId: string;
+  postCategory: {
+    id: number;
+    description: string;
+  };
   postStatusId: number;
 }
