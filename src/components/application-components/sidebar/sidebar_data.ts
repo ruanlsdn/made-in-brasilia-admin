@@ -47,17 +47,6 @@ export const SIDEBAR_DATA: SidebarData[] = [
     ],
   },
   {
-    group: "MODERAÇÃO",
-    links: [
-      {
-        icon: FaChalkboardTeacher,
-        title: "Postagens pendentes",
-        description: "Página de gerenciamento de pendências da entidade Post",
-        path: "/pending-posts",
-      },
-    ],
-  },
-  {
     group: "USUÁRIOS",
     links: [
       {
