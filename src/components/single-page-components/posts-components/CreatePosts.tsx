@@ -66,7 +66,9 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
   );
   const [newPostCityId, setNewPostCityId] = useState<string | undefined>("");
   const [newPostStatusId, setNewPostStatusId] = useState<number | undefined>(1);
-  const [newPostCategory, setNewPostCategory] = useState("");
+  const [newPostCategory, setNewPostCategory] = useState<number | undefined>(
+    undefined
+  );
   const [postImages, setPostImages] = useState<FormData[] | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -228,7 +230,7 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
                 id="demo-select-small"
                 label="Categoria"
                 value={newPostCategory}
-                onChange={(e) => setNewPostCategory(e.target.value)}
+                onChange={(e) => setNewPostCategory(Number(e.target.value))}
               >
                 <MenuItem value="">
                   <em>Selecione uma categoria</em>
