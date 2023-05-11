@@ -39,19 +39,19 @@ const CreateCities = () => {
     setCityImages(images);
   };
 
-  const handleSearchClick = async () => {
-    setIsLoading(true);
-    try {
-      const response = await getCityIaTextsRequest(cityName);
-      setCityDto({ ...response.data, name: cityName });
-    } catch (error) {
-      const axiosError = error as AxiosError;
-      setIsSnackbarOpen(true);
-      setSnackbarMessage(axiosError.message);
-      setSnackbarSeverity("error");
-    }
-    setIsLoading(false);
-  };
+  // const handleSearchClick = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await getCityIaTextsRequest(cityName);
+  //     setCityDto({ ...response.data, name: cityName });
+  //   } catch (error) {
+  //     const axiosError = error as AxiosError;
+  //     setIsSnackbarOpen(true);
+  //     setSnackbarMessage(axiosError.message);
+  //     setSnackbarSeverity("error");
+  //   }
+  //   setIsLoading(false);
+  // };
 
   const upload = async (form: FormData) => {
     try {
