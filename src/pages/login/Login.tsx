@@ -56,7 +56,6 @@ const Login = () => {
               onChange={(e) => setNewPassword(e.target.value)}
               required
             />
-            <a href="">Esqueci a senha</a>
           </div>
           <button className="gradient-bg-colorful" type="submit">
             <span>Entrar</span>
