@@ -1,0 +1,21 @@
+.footer-link {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family);
+}
+
+.footer-link h3 {
+  margin-bottom: 1rem;
+  font-size: 18px;
+  color: var(--text-color);
+}
+
+.footer-link a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.footer-link a:hover {
+  color: var(--secondary-color);
+}
