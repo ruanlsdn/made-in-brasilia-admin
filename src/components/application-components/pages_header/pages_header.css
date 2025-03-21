@@ -2,13 +2,13 @@
   font-family: var(--font-family);
 }
 
-.header p:first-child {
+.header p:last-child {
   font-size: 18px;
   font-weight: 300;
   color: var(--secondary-color);
 }
 
-.header p:last-child {
+.header p:first-child {
   font-size: 24px;
   font-weight: 600;
   color: var(--text-color);

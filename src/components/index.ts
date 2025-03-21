@@ -10,3 +10,5 @@ export { default as UpdateCities } from "./single-page-components/cities-compone
 export { default as DeleteCities } from "./single-page-components/cities-components/DeleteCities";
 export { default as CreatePosts } from "./single-page-components/posts-components/CreatePosts";
 export { default as DeletePosts } from "./single-page-components/posts-components/DeletePosts";
+export { default as Footer } from "./application-components/footer/Footer";
+export { default as Banner } from "./application-components/banner/Banner";

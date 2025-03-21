@@ -31,8 +31,8 @@ const DeleteCities = () => {
   return (
     <div className="delete-cities-content">
       <div className="delete-cities-header">
-        <h1>Excluir cidade</h1>
-        <p>Deseja realmente excluir esta cidade?</p>
+        <h1>Excluir bairro</h1>
+        <p>Deseja realmente excluir esta bairro?</p>
       </div>
       <div className="delete-cities-footer">
         <p>Clique no botão abaixo para confirmar</p>

@@ -94,8 +94,8 @@ const CreateCities = () => {
   return (
     <div className="create-cities-content">
       <div className="create-cities-header">
-        <h1>Adicionar cidade</h1>
-        <p>Preencha os campos abaixo com as informações da cidade</p>
+        <h1>Adicionar bairro</h1>
+        <p>Preencha os campos abaixo com as informações da bairro</p>
       </div>
       <div className="create-cities-form">
         <Grid container spacing={2}>
@@ -110,7 +110,7 @@ const CreateCities = () => {
               className="form-text-input"
               id="outlined-basic"
               label="Nome"
-              placeholder="Informe o nome da cidade..."
+              placeholder="Informe o nome da bairro..."
               variant="outlined"
               onChange={(e) => setCityName(e.target.value)}
             />
@@ -123,7 +123,7 @@ const CreateCities = () => {
               className="form-text-input"
               id="outlined-basic"
               label="Título"
-              placeholder="Informe um título para a cidade..."
+              placeholder="Informe um título para a bairro..."
               variant="outlined"
               onChange={(e) => setCityTitle(e.target.value)}
             />
@@ -133,7 +133,7 @@ const CreateCities = () => {
               className="form-text-input"
               id="outlined-basic"
               label="História"
-              placeholder="Informe uma breve história da cidade..."
+              placeholder="Informe uma breve história da bairro..."
               variant="outlined"
               onChange={(e) => setCityHistory(e.target.value)}
             />

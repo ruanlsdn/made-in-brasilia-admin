@@ -107,39 +107,47 @@ const PendingPosts = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {posts.map((post, index) => (
-                <TableRow key={index}>
-                  <TableCell align="center">
-                    <span>{post.name}</span>
+              {posts.length > 0 ? (
+                posts.map((post, index) => (
+                  <TableRow key={index}>
+                    <TableCell align="center">
+                      <span>{post.name}</span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span>{post.text}</span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span>{`${post.openDay} - ${post.closeDay}`}</span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span>{`${post.openTime} - ${post.closeTime}`}</span>
+                    </TableCell>
+                    <TableCell align="right">
+                      <div className="pending-posts-thumbs-container">
+                        <button
+                          className="pending-posts-thumbs"
+                          onClick={() => handleThumbsUp(post.id)}
+                        >
+                          <FiThumbsUp size={30} />
+                        </button>
+                        <button
+                          className="pending-posts-thumbs"
+                          onClick={() => handleThumbsDown(post.id)}
+                        >
+                          <FiThumbsDown size={30} />
+                        </button>
+                      </div>
+                    </TableCell>
+                    <TableCell />
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={6} align="center">
+                    <h3>Nenhuma Postagem Pendente</h3>
                   </TableCell>
-                  <TableCell align="center">
-                    <span>{post.text}</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span>{`${post.openDay} - ${post.closeDay}`}</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span>{`${post.openTime} - ${post.closeTime}`}</span>
-                  </TableCell>
-                  <TableCell align="right">
-                    <div className="pending-posts-thumbs-container">
-                      <button
-                        className="pending-posts-thumbs"
-                        onClick={() => handleThumbsUp(post.id)}
-                      >
-                        <FiThumbsUp size={30} />
-                      </button>
-                      <button
-                        className="pending-posts-thumbs"
-                        onClick={() => handleThumbsDown(post.id)}
-                      >
-                        <FiThumbsDown size={30} />
-                      </button>
-                    </div>
-                  </TableCell>
-                  <TableCell />
                 </TableRow>
-              ))}
+              )}
             </TableBody>
           </Table>
         </TableContainer>

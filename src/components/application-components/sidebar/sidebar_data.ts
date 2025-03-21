@@ -34,7 +34,7 @@ export const SIDEBAR_DATA: SidebarData[] = [
     links: [
       {
         icon: GiModernCity,
-        title: "Cidades",
+        title: "Bairros",
         description: "Página de gerenciamento da entidade City",
         path: "/cities",
       },
@@ -43,6 +43,17 @@ export const SIDEBAR_DATA: SidebarData[] = [
         title: "Postagens",
         description: "Página de gerenciamento da entidade Post",
         path: "/posts",
+      },
+    ],
+  },
+  {
+    group: "MODERAÇÃO",
+    links: [
+      {
+        icon: FaChalkboardTeacher,
+        title: "Postagens pendentes",
+        description: "Página de gerenciamento de pendências da entidade Post",
+        path: "/pending-posts",
       },
     ],
   },

@@ -317,16 +317,16 @@ const CreatePosts = ({ modalOption }: CreatePostsProps) => {
           </Grid>
           <Grid item xs={12}>
             <FormControl sx={{ minWidth: "100%" }}>
-              <InputLabel id="demo-select-small">Cidade</InputLabel>
+              <InputLabel id="demo-select-small">Bairro</InputLabel>
               <Select
                 labelId="demo-select-small"
                 id="demo-select-small"
-                label="Cidade"
+                label="Bairro"
                 value={newPostCityId}
                 onChange={(e) => setNewPostCityId(e.target.value)}
               >
                 <MenuItem value="">
-                  <em>Selecione uma cidade...</em>
+                  <em>Selecione uma bairro...</em>
                 </MenuItem>
                 {cities.map((city, index) => (
                   <MenuItem key={index} value={city.id}>

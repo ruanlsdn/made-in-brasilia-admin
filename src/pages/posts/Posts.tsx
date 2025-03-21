@@ -100,29 +100,34 @@ const Posts = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {posts.map((post, index) => (
-                <TableRow key={index}>
-                  <TableCell align="center">
-                    <span>{post.name}</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span>{post.text}</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span>{`${post.openDay} - ${post.closeDay}`}</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span>{`${post.openTime} - ${post.closeTime}`}</span>
-                  </TableCell>
-                  <TableCell align="center">
-                    <span>{post.postCategory.description}</span>
-                  </TableCell>
-                  <TableCell />
-                  <TableCell>
-                    <SharedMenu entity={post} setModalOption={setModalOption} />
-                  </TableCell>
-                </TableRow>
-              ))}
+              {posts.map((post, index) =>
+                post.postStatusId === 2 ? (
+                  <TableRow key={index}>
+                    <TableCell align="center">
+                      <span>{post.name}</span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span>{post.text}</span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span>{`${post.openDay} - ${post.closeDay}`}</span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span>{`${post.openTime} - ${post.closeTime}`}</span>
+                    </TableCell>
+                    <TableCell align="center">
+                      <span>{post.postCategory.description}</span>
+                    </TableCell>
+                    <TableCell />
+                    <TableCell>
+                      <SharedMenu
+                        entity={post}
+                        setModalOption={setModalOption}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ) : null
+              )}
             </TableBody>
           </Table>
         </TableContainer>

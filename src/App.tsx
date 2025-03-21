@@ -42,14 +42,14 @@ function App() {
               </ProtectedLayout>
             }
           />
-          {/* <Route
+          <Route
             path="/pending-posts"
             element={
               <ProtectedLayout>
                 <PendingPosts />
               </ProtectedLayout>
             }
-          /> */}
+          />
           <Route
             path="/users"
             element={

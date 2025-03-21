@@ -43,7 +43,7 @@ const UpdateCities = () => {
   return (
     <div className="update-cities-content">
       <div className="update-cities-header">
-        <h1>Atualizar cidade</h1>
+        <h1>Atualizar bairro</h1>
         <p>Edite os campos que deseja atualizar</p>
       </div>
       <div className="update-cities-form">
